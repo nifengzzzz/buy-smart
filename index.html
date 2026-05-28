@@ -4,13 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BuySmart — AI驱动的数码产品选购引擎</title>
-<meta name="description" content="AI实时比价六平台，覆盖手机、笔记本、耳机、家电、显示器、相机、游戏装备、智能家居。深度评测帮你决策，买对不买贵。">
+<meta name="description" content="AI实时比价六平台，覆盖10+品类。深度评测帮你决策，买对不买贵。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#050508;--bg-card:rgba(255,255,255,0.025);--bg-card-hover:rgba(255,255,255,0.05);
-  --border:rgba(255,255,255,0.05);--border-hover:rgba(255,255,255,0.1);
+  --border:rgba(255,255,255,0.06);--border-hover:rgba(255,255,255,0.12);
   --text:#eaeaf0;--text-secondary:#8888a0;--text-dim:#4a4a60;
   --accent:#7c5ce7;--accent2:#00cec9;--accent3:#ff6b9d;--accent-glow:rgba(124,92,231,0.3);
   --radius:18px;--radius-sm:12px;--transition:0.3s cubic-bezier(0.4,0,0.2,1);
@@ -22,121 +22,149 @@ body{
   background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;
   overflow-x:hidden;
 }
-/* Animated BG */
-#bg-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.6}
+#bg-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.5}
 .container{max-width:1300px;margin:0 auto;padding:0 28px;position:relative;z-index:1}
-/* Mouse Glow */
-.mouse-glow{position:fixed;width:500px;height:500px;border-radius:50%;pointer-events:none;z-index:0;
-  background:radial-gradient(circle,rgba(124,92,231,0.06),transparent 70%);
-  transform:translate(-50%,-50%);transition:opacity 0.3s;opacity:0}
+.mouse-glow{position:fixed;width:600px;height:600px;border-radius:50%;pointer-events:none;z-index:0;
+  background:radial-gradient(circle,rgba(124,92,231,0.05),transparent 65%);transform:translate(-50%,-50%);transition:opacity 0.4s;opacity:0}
+
+/* SVG Icon System */
+.icon{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.icon svg{width:100%;height:100%}
+.icon-sm{width:18px;height:18px}.icon-md{width:24px;height:24px}.icon-lg{width:32px;height:32px}.icon-xl{width:48px;height:48px}.icon-2xl{width:64px;height:64px}
+.icon-stroke{stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.icon-fill{fill:currentColor}
+
 /* Nav */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(5,5,8,0.75);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border-bottom:1px solid var(--border)}
 nav .container{display:flex;align-items:center;justify-content:space-between;height:64px}
-.logo{font-weight:900;font-size:1.3rem;background:linear-gradient(135deg,var(--accent2),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-decoration:none;letter-spacing:-0.02em}
-.nav-links{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end}
-.nav-links a{color:var(--text-secondary);text-decoration:none;font-size:0.8rem;font-weight:500;padding:6px 12px;border-radius:8px;transition:var(--transition);white-space:nowrap}
-.nav-links a:hover,.nav-links a.active{color:var(--text);background:var(--bg-card)}
-.nav-links a.active{color:var(--accent2)}
+.logo-wrap{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-mark{width:34px;height:34px;position:relative}
+.logo-text{font-weight:800;font-size:1.2rem;color:var(--text);letter-spacing:-0.02em}
+.nav-links{display:flex;gap:2px;flex-wrap:wrap;justify-content:flex-end}
+.nav-links a{display:flex;align-items:center;gap:5px;color:var(--text-secondary);text-decoration:none;font-size:0.78rem;font-weight:500;padding:6px 12px;border-radius:8px;transition:var(--transition);white-space:nowrap}
+.nav-links a:hover{color:var(--text);background:var(--bg-card)}
+.nav-links a.active{color:var(--accent2);background:rgba(0,206,201,0.06)}
+.nav-icon{width:15px;height:15px;opacity:0.7}
+
 /* Hero */
-.hero{position:relative;padding:160px 0 100px;text-align:center}
+.hero{position:relative;padding:160px 0 90px;text-align:center}
 .hero .pill{display:inline-flex;align-items:center;gap:8px;background:var(--bg-card);border:1px solid var(--border);border-radius:100px;padding:7px 20px;font-size:0.8rem;color:var(--text-secondary);margin-bottom:28px;animation:fadeInUp 0.6s ease-out}
 .hero .pill .live-dot{width:7px;height:7px;border-radius:50%;background:var(--accent2);animation:glowPulse 2s infinite;box-shadow:0 0 8px var(--accent2)}
 @keyframes glowPulse{0%,100%{opacity:1;box-shadow:0 0 6px var(--accent2)}50%{opacity:0.3;box-shadow:0 0 12px var(--accent2)}}
 .hero h1{font-size:clamp(2.8rem,7vw,5rem);font-weight:900;letter-spacing:-0.04em;line-height:1.08;margin-bottom:24px;animation:fadeInUp 0.6s ease-out 0.1s both}
-.hero h1 .gradient-text{background:linear-gradient(135deg,var(--accent2) 0%,var(--accent) 50%,var(--accent3) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:200% auto;animation:gradientShift 4s ease-in-out infinite}
+.gradient-text{background:linear-gradient(135deg,var(--accent2) 0%,var(--accent) 50%,var(--accent3) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:200% auto;animation:gradientShift 4s ease-in-out infinite}
 @keyframes gradientShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
 .hero p{color:var(--text-secondary);font-size:1.15rem;max-width:560px;margin:0 auto 40px;line-height:1.75;animation:fadeInUp 0.6s ease-out 0.2s both}
-.hero-stats{display:flex;justify-content:center;gap:48px;flex-wrap:wrap;animation:fadeInUp 0.6s ease-out 0.3s both}
+.hero-stats{display:flex;justify-content:center;gap:56px;flex-wrap:wrap;animation:fadeInUp 0.6s ease-out 0.3s both}
 .hero-stat{text-align:center}
 .hero-stat .num{font-family:'JetBrains Mono',monospace;font-size:2.4rem;font-weight:800;background:linear-gradient(135deg,var(--accent2),var(--accent3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block}
-.hero-stat .label{font-size:0.8rem;color:var(--text-dim);margin-top:4px;text-transform:uppercase;letter-spacing:0.08em}
-/* Category Bar */
-.cat-bar{padding:0 0 50px;animation:fadeInUp 0.6s ease-out 0.4s both}
-.cat-scroll{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
-.cat-item{display:flex;align-items:center;gap:8px;padding:10px 20px;background:var(--bg-card);border:1px solid var(--border);border-radius:100px;color:var(--text-secondary);text-decoration:none;font-size:0.85rem;font-weight:500;transition:var(--transition);white-space:nowrap}
-.cat-item:hover{background:var(--bg-card-hover);border-color:var(--accent);color:var(--text);transform:translateY(-2px);box-shadow:0 4px 20px var(--accent-glow)}
-.cat-item .cat-icon{font-size:1.2rem}
+.hero-stat .label{font-size:0.78rem;color:var(--text-dim);margin-top:4px;text-transform:uppercase;letter-spacing:0.08em}
+
+/* Category Grid */
+.cat-section{padding:0 0 60px;animation:fadeInUp 0.6s ease-out 0.4s both}
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
+.cat-card{display:flex;flex-direction:column;align-items:center;gap:10px;padding:18px 14px 16px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);text-decoration:none;color:var(--text-secondary);transition:var(--transition);position:relative;overflow:hidden}
+.cat-card::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at 50% 0%,rgba(124,92,231,0.08),transparent);opacity:0;transition:opacity 0.4s}
+.cat-card:hover::before{opacity:1}
+.cat-card:hover{background:var(--bg-card-hover);border-color:var(--accent);color:var(--text);transform:translateY(-3px);box-shadow:0 8px 30px rgba(0,0,0,0.3)}
+.cat-card:hover .cat-icon-wrap{border-color:var(--accent);box-shadow:0 0 20px var(--accent-glow)}
+.cat-card:hover .cat-icon-wrap svg{color:var(--accent2)}
+.cat-icon-wrap{width:44px;height:44px;border-radius:12px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;transition:var(--transition);background:rgba(255,255,255,0.02)}
+.cat-icon-wrap svg{width:22px;height:22px;color:var(--text-dim);transition:var(--transition)}
+.cat-label{font-size:0.78rem;font-weight:600;letter-spacing:-0.01em}
+
 /* Sections */
-section{padding:40px 0 70px}
+section{padding:20px 0 60px}
 .section-header{margin-bottom:36px}
-.section-label{font-family:'JetBrains Mono',monospace;font-size:0.72rem;font-weight:600;color:var(--accent2);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.section-label{font-family:'JetBrains Mono',monospace;font-size:0.7rem;font-weight:600;color:var(--accent2);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px;display:flex;align-items:center;gap:10px}
 .section-label::after{content:'';flex:1;height:1px;background:var(--border)}
-section h2{font-size:2rem;font-weight:800;letter-spacing:-0.02em;margin-bottom:8px}
+section h2{font-size:2rem;font-weight:800;letter-spacing:-0.02em;margin-bottom:8px;display:flex;align-items:center;gap:12px}
+section h2 .sec-icon{width:28px;height:28px;color:var(--accent2)}
 .section-desc{color:var(--text-secondary);font-size:0.95rem}
+
 /* Price Table */
 .price-table-wrap{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;backdrop-filter:blur(10px);position:relative}
-.price-table-wrap::before{content:'';position:absolute;top:0;left:20%;right:20%;height:1px;background:linear-gradient(90deg,transparent,var(--accent),var(--accent2),transparent);opacity:0.6}
+.price-table-wrap::before{content:'';position:absolute;top:0;left:20%;right:20%;height:1px;background:linear-gradient(90deg,transparent,var(--accent),var(--accent2),transparent);opacity:0.5}
 .price-table{width:100%;border-collapse:collapse}
-.price-table th{text-align:left;padding:16px 24px;font-size:0.72rem;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.08em;border-bottom:1px solid var(--border);font-family:'JetBrains Mono',monospace;background:rgba(255,255,255,0.01)}
+.price-table th{text-align:left;padding:16px 24px;font-size:0.7rem;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.08em;border-bottom:1px solid var(--border);font-family:'JetBrains Mono',monospace;background:rgba(255,255,255,0.01)}
 .price-table td{padding:16px 24px;font-size:0.9rem;border-bottom:1px solid rgba(255,255,255,0.03);transition:var(--transition)}
 .price-table tr:last-child td{border-bottom:none}
 .price-table tbody tr{transition:var(--transition)}
 .price-table tbody tr:hover{background:rgba(124,92,231,0.04)}
 .price-table .price{font-family:'JetBrains Mono',monospace;font-weight:600;color:#ff6b6b}
 .price-table .lowest{font-family:'JetBrains Mono',monospace;font-weight:600;color:#00b894}
-.platform-tag{display:inline-block;padding:3px 10px;border-radius:6px;font-size:0.72rem;font-weight:700}
+.platform-tag{display:inline-block;padding:3px 10px;border-radius:6px;font-size:0.7rem;font-weight:700}
 .tag-pdd{background:rgba(255,107,107,0.15);color:#ff6b6b}.tag-jd{background:rgba(0,184,148,0.15);color:#00b894}.tag-tb{background:rgba(253,203,110,0.15);color:#fdcb6e}
-.price-change{font-size:0.72rem;margin-left:6px;font-family:'JetBrains Mono',monospace}
-.price-up{color:#ff6b6b}.price-down{color:#00b894}
-/* Cards Grid */
+.price-delta{font-size:0.7rem;margin-left:6px;font-family:'JetBrains Mono',monospace;display:inline-flex;align-items:center;gap:2px}
+.up{color:#ff6b6b}.down{color:#00b894}
+
+/* Cards */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(370px,1fr));gap:18px}
 .card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;transition:all 0.4s cubic-bezier(0.4,0,0.2,1);position:relative;overflow:hidden;backdrop-filter:blur(10px);cursor:pointer;text-decoration:none;display:block;color:inherit}
-.card::before{content:'';position:absolute;inset:0;border-radius:var(--radius);background:radial-gradient(400px circle at var(--mouse-x,50%) var(--mouse-y,50%),rgba(124,92,231,0.08),transparent);opacity:0;transition:opacity 0.4s}
+.card::before{content:'';position:absolute;inset:0;border-radius:var(--radius);background:radial-gradient(500px circle at var(--mx,50%) var(--my,50%),rgba(124,92,231,0.07),transparent);opacity:0;transition:opacity 0.4s}
 .card:hover::before{opacity:1}
-.card:hover{background:var(--bg-card-hover);border-color:var(--border-hover);transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,0.4),0 0 0 1px var(--accent-glow)}
+.card:hover{background:var(--bg-card-hover);border-color:var(--border-hover);transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,0.4),0 0 0 1px rgba(124,92,231,0.15)}
 .card .tags{display:flex;gap:6px;margin-bottom:18px;flex-wrap:wrap;position:relative;z-index:1}
-.card .tag{font-size:0.68rem;font-weight:700;padding:4px 10px;border-radius:6px;letter-spacing:0.03em}
+.tag{font-size:0.66rem;font-weight:700;padding:4px 10px;border-radius:6px;letter-spacing:0.03em;display:inline-flex;align-items:center;gap:4px}
 .tag-hot{background:rgba(255,107,157,0.15);color:#ff6b9d}.tag-new{background:rgba(0,206,201,0.13);color:#00cec9}
 .tag-ai{background:rgba(124,92,231,0.15);color:var(--accent)}.tag-deal{background:rgba(0,184,148,0.13);color:#00b894}
-.card h3{font-size:1.1rem;font-weight:700;margin-bottom:10px;line-height:1.4;position:relative;z-index:1}
-.card .meta{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--text-dim);margin-bottom:14px;position:relative;z-index:1}
-.card p{font-size:0.88rem;color:var(--text-secondary);margin-bottom:18px;line-height:1.65;position:relative;z-index:1}
-.card .cta-row{display:flex;align-items:center;gap:6px;font-size:0.85rem;font-weight:600;color:var(--accent2);position:relative;z-index:1;transition:var(--transition)}
-.card:hover .cta-row{gap:12px;color:#fff}
-/* Features Grid */
+.card h3{font-size:1.08rem;font-weight:700;margin-bottom:10px;line-height:1.4;position:relative;z-index:1}
+.card .meta{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--text-dim);margin-bottom:14px;position:relative;z-index:1}
+.card p{font-size:0.87rem;color:var(--text-secondary);margin-bottom:18px;line-height:1.65;position:relative;z-index:1}
+.card .cta-row{display:inline-flex;align-items:center;gap:6px;font-size:0.84rem;font-weight:600;color:var(--accent2);position:relative;z-index:1;transition:var(--transition)}
+.card:hover .cta-row{gap:10px;color:#fff}
+.cta-arrow{width:16px;height:16px;transition:transform 0.3s}
+.card:hover .cta-arrow{transform:translateX(3px)}
+
+/* Features */
 .features{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px}
 .feature-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:32px 28px;transition:var(--transition);backdrop-filter:blur(10px);position:relative;overflow:hidden}
-.feature-card::after{content:'';position:absolute;bottom:0;left:24px;right:24px;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0;transition:opacity 0.4s}
+.feature-card::after{content:'';position:absolute;bottom:0;left:28px;right:28px;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0;transition:opacity 0.4s}
 .feature-card:hover{background:var(--bg-card-hover);border-color:var(--border-hover);transform:translateY(-3px)}
 .feature-card:hover::after{opacity:1}
-.feature-icon{font-size:2.2rem;margin-bottom:18px;display:block;transition:transform 0.4s}
-.feature-card:hover .feature-icon{transform:scale(1.1)}
-.feature-card h3{font-size:1.05rem;font-weight:700;margin-bottom:8px}
+.ft-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;border:1px solid var(--border);transition:var(--transition)}
+.feature-card:hover .ft-icon{border-color:var(--accent);box-shadow:0 0 20px var(--accent-glow)}
+.ft-icon svg{width:22px;height:22px;color:var(--accent2);transition:transform 0.3s}
+.feature-card:hover .ft-icon svg{transform:scale(1.12)}
+.feature-card h3{font-size:1.02rem;font-weight:700;margin-bottom:8px}
 .feature-card p{font-size:0.85rem;color:var(--text-secondary);line-height:1.65}
+
 /* Stat Bar */
 .stat-bar{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;margin:50px 0}
 .stat-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;text-align:center;backdrop-filter:blur(10px);transition:var(--transition)}
 .stat-card:hover{background:var(--bg-card-hover);border-color:var(--accent)}
 .stat-card .stat-num{font-family:'JetBrains Mono',monospace;font-size:2rem;font-weight:800;background:linear-gradient(135deg,var(--accent2),var(--accent3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.stat-card .stat-label{font-size:0.8rem;color:var(--text-dim);margin-top:6px}
+.stat-card .stat-label{font-size:0.78rem;color:var(--text-dim);margin-top:6px}
+
 /* CTA */
 .cta{position:relative;background:linear-gradient(135deg,rgba(124,92,231,0.1),rgba(0,206,201,0.06),rgba(255,107,157,0.04));border:1px solid var(--border);border-radius:var(--radius);padding:56px 48px;text-align:center;margin:40px 0;backdrop-filter:blur(15px);overflow:hidden}
-.cta::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:conic-gradient(from 0deg,transparent,var(--accent),var(--accent2),transparent);animation:spin 8s linear infinite;opacity:0.03}
+.cta::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:conic-gradient(from 0deg,transparent,var(--accent),var(--accent2),transparent);animation:spin 8s linear infinite;opacity:0.025}
 @keyframes spin{to{transform:rotate(360deg)}}
 .cta h2{font-size:1.8rem;font-weight:800;margin-bottom:12px;position:relative}
 .cta p{color:var(--text-secondary);margin-bottom:28px;font-size:1rem;position:relative}
 .cta-form{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;position:relative}
 .cta-form input{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:100px;padding:14px 24px;color:var(--text);font-family:'Inter',sans-serif;font-size:0.9rem;width:320px;max-width:100%;outline:none;transition:var(--transition)}
 .cta-form input:focus{border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-glow)}
-.cta-form button{background:linear-gradient(135deg,var(--accent),var(--accent3));border:none;border-radius:100px;padding:14px 32px;color:#fff;font-family:'Inter',sans-serif;font-size:0.9rem;font-weight:700;cursor:pointer;transition:var(--transition);position:relative;overflow:hidden}
+.cta-form button{background:linear-gradient(135deg,var(--accent),var(--accent3));border:none;border-radius:100px;padding:14px 32px;color:#fff;font-family:'Inter',sans-serif;font-size:0.9rem;font-weight:700;cursor:pointer;transition:var(--transition);position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:8px}
 .cta-form button::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--accent3),var(--accent2));opacity:0;transition:opacity 0.3s}
 .cta-form button:hover{transform:translateY(-2px);box-shadow:0 8px 30px var(--accent-glow)}
 .cta-form button:hover::after{opacity:1}
-/* Footer */
-footer{border-top:1px solid var(--border);padding:40px 0;text-align:center;color:var(--text-dim);font-size:0.82rem;position:relative;z-index:1}
+
+footer{border-top:1px solid var(--border);padding:40px 0;text-align:center;color:var(--text-dim);font-size:0.8rem;position:relative;z-index:1}
 footer a{color:var(--text-secondary);text-decoration:none;transition:var(--transition);margin:0 8px}
 footer a:hover{color:var(--text)}
-/* Animations */
+
 @keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
 .reveal{opacity:0;transform:translateY(40px);transition:all 0.7s cubic-bezier(0.4,0,0.2,1)}
 .reveal.visible{opacity:1;transform:translateY(0)}
-/* Scrollbar */
-::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
-/* Mobile */
+
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+
 @media(max-width:768px){
-  .hero{padding:130px 0 60px}.hero h1{font-size:2.2rem}.hero-stats{gap:30px}
+  .hero{padding:130px 0 60px}.hero h1{font-size:2.2rem}.hero-stats{gap:36px}
   .grid{grid-template-columns:1fr}.features{grid-template-columns:1fr}
-  .cat-scroll{overflow-x:auto;flex-wrap:nowrap;justify-content:flex-start;padding-bottom:8px;-webkit-overflow-scrolling:touch}
+  .cat-grid{grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px}
+  .cat-card{padding:14px 10px 12px}.cat-icon-wrap{width:36px;height:36px;border-radius:10px}.cat-icon-wrap svg{width:18px;height:18px}.cat-label{font-size:0.7rem}
   .price-table-wrap{overflow-x:auto}.price-table{min-width:550px}
   .cta{padding:40px 24px}
 }
@@ -149,17 +177,27 @@ footer a:hover{color:var(--text)}
 
 <nav>
   <div class="container">
-    <a href="index.html" class="logo">BuySmart</a>
+    <a href="index.html" class="logo-wrap">
+      <div class="logo-mark">
+        <svg viewBox="0 0 34 34" fill="none">
+          <rect x="2" y="2" width="30" height="30" rx="8" stroke="url(#logoGrad)" stroke-width="2.2"/>
+          <path d="M10 22V12l6 8V12" stroke="url(#logoGrad)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M20 12v10h6" stroke="url(#logoGrad)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <defs><linearGradient id="logoGrad" x1="2" y1="2" x2="34" y2="34"><stop stop-color="#00cec9"/><stop offset="1" stop-color="#7c5ce7"/></linearGradient></defs>
+        </svg>
+      </div>
+      <span class="logo-text">BuySmart</span>
+    </a>
     <div class="nav-links">
-      <a href="index.html" class="active">首页</a>
-      <a href="phone.html">手机</a>
-      <a href="laptop.html">笔记本</a>
-      <a href="earphone.html">耳机</a>
-      <a href="appliance.html">家电</a>
-      <a href="monitor.html">显示器</a>
-      <a href="gaming.html">游戏</a>
-      <a href="smarthome.html">智能家居</a>
-      <a href="compare.html">比价</a>
+      <a href="index.html" class="active"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>首页</a>
+      <a href="phone.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>手机</a>
+      <a href="laptop.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="2" y1="20" x2="22" y2="20"/></svg>笔记本</a>
+      <a href="earphone.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>耳机</a>
+      <a href="appliance.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>家电</a>
+      <a href="monitor.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>显示器</a>
+      <a href="gaming.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="11" x2="10" y2="11"/><line x1="8" y1="9" x2="8" y2="13"/><line x1="15" y1="12" x2="15.01" y2="12"/><line x1="18" y1="10" x2="18.01" y2="10"/><rect x="2" y="6" width="20" height="12" rx="2"/></svg>游戏</a>
+      <a href="smarthome.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>智能家居</a>
+      <a href="compare.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>比价</a>
     </div>
   </div>
 </nav>
@@ -170,140 +208,163 @@ footer a:hover{color:var(--text)}
     <h1>买对<span class="gradient-text">不买贵</span></h1>
     <p>AI 驱动的智能选购引擎。覆盖 10+ 品类，六平台实时比价，深度评测帮你决策。</p>
     <div class="hero-stats">
-      <div class="hero-stat"><span class="num" data-count="6">6</span><div class="label">比价平台</div></div>
-      <div class="hero-stat"><span class="num" data-count="300">300+</span><div class="label">深度评测</div></div>
-      <div class="hero-stat"><span class="num" data-count="10">10+</span><div class="label">覆盖品类</div></div>
-      <div class="hero-stat"><span class="num" data-count="24">24h</span><div class="label">价格更新</div></div>
+      <div class="hero-stat"><span class="num">6</span><div class="label">比价平台</div></div>
+      <div class="hero-stat"><span class="num">300+</span><div class="label">深度评测</div></div>
+      <div class="hero-stat"><span class="num">10+</span><div class="label">覆盖品类</div></div>
+      <div class="hero-stat"><span class="num">24h</span><div class="label">价格更新</div></div>
     </div>
   </div>
 </header>
 
-<div class="cat-bar">
+<div class="cat-section">
   <div class="container">
-    <div class="cat-scroll">
-      <a href="phone.html" class="cat-item"><span class="cat-icon">📱</span>手机</a>
-      <a href="laptop.html" class="cat-item"><span class="cat-icon">💻</span>笔记本</a>
-      <a href="earphone.html" class="cat-item"><span class="cat-icon">🎧</span>耳机</a>
-      <a href="appliance.html" class="cat-item"><span class="cat-icon">🏠</span>家电</a>
-      <a href="monitor.html" class="cat-item"><span class="cat-icon">🖥</span>显示器</a>
-      <a href="gaming.html" class="cat-item"><span class="cat-icon">🎮</span>游戏装备</a>
-      <a href="smarthome.html" class="cat-item"><span class="cat-icon">🤖</span>智能家居</a>
-      <a href="watch.html" class="cat-item"><span class="cat-icon">⌚</span>穿戴</a>
-      <a href="compare.html" class="cat-item"><span class="cat-icon">📊</span>实时比价</a>
+    <div class="cat-grid">
+      <a href="phone.html" class="cat-card">
+        <div class="cat-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
+        <span class="cat-label">手机</span>
+      </a>
+      <a href="laptop.html" class="cat-card">
+        <div class="cat-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="2" y1="20" x2="22" y2="20"/></svg></div>
+        <span class="cat-label">笔记本</span>
+      </a>
+      <a href="earphone.html" class="cat-card">
+        <div class="cat-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg></div>
+        <span class="cat-label">耳机</span>
+      </a>
+      <a href="appliance.html" class="cat-card">
+        <div class="cat-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2"/><circle cx="12" cy="12" r="4"/></svg></div>
+        <span class="cat-label">家电</span>
+      </a>
+      <a href="monitor.html" class="cat-card">
+        <div class="cat-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+        <span class="cat-label">显示器</span>
+      </a>
+      <a href="gaming.html" class="cat-card">
+        <div class="cat-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><line x1="6" y1="11" x2="10" y2="11"/><line x1="8" y1="9" x2="8" y2="13"/><circle cx="15" cy="11" r="0.5" fill="currentColor" stroke="none"/><circle cx="18" cy="10" r="0.5" fill="currentColor" stroke="none"/></svg></div>
+        <span class="cat-label">游戏装备</span>
+      </a>
+      <a href="smarthome.html" class="cat-card">
+        <div class="cat-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 9v2h2v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-9h2V9l-10-7z"/><path d="M9 21V12h6v9"/></svg></div>
+        <span class="cat-label">智能家居</span>
+      </a>
+      <a href="watch.html" class="cat-card">
+        <div class="cat-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="7"/><polyline points="12 7 12 12 15 15"/></svg></div>
+        <span class="cat-label">穿戴</span>
+      </a>
+      <a href="compare.html" class="cat-card">
+        <div class="cat-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <span class="cat-label">实时比价</span>
+      </a>
     </div>
   </div>
 </div>
 
 <main class="container">
 
-<!-- Price Table -->
 <section>
   <div class="section-header">
     <div class="section-label">/// real-time pricing</div>
-    <h2>实时比价</h2>
+    <h2><svg class="sec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>实时比价</h2>
     <p class="section-desc">AI 每日扫描六大平台，锁定最低价。数据更新于 2026-05-28</p>
   </div>
   <div class="price-table-wrap">
     <table class="price-table">
       <thead><tr><th>品类</th><th>商品</th><th>拼多多</th><th>淘宝</th><th>京东</th><th>最低价</th></tr></thead>
       <tbody>
-        <tr><td>📱</td><td>iPhone 17 128G</td><td class="price">¥5,299<span class="price-change price-down">↓80</span></td><td>¥5,499</td><td>¥5,599</td><td class="lowest"><span class="platform-tag tag-pdd">拼多多</span> ¥5,299</td></tr>
-        <tr><td>📱</td><td>华为 Mate 80 256G</td><td class="price">¥4,099<span class="price-change price-down">↓100</span></td><td>¥4,199</td><td>¥4,299</td><td class="lowest"><span class="platform-tag tag-pdd">拼多多</span> ¥4,099</td></tr>
-        <tr><td>💻</td><td>MacBook Air M4</td><td class="price">¥7,199</td><td>¥7,499<span class="price-change price-down">↓300</span></td><td>¥7,599</td><td class="lowest"><span class="platform-tag tag-pdd">拼多多</span> ¥7,199</td></tr>
-        <tr><td>🏠</td><td>戴森 V16 Detect</td><td>¥3,699</td><td class="price">¥3,499<span class="price-change price-down">↓200</span></td><td>¥3,799</td><td class="lowest"><span class="platform-tag tag-tb">淘宝</span> ¥3,499</td></tr>
-        <tr><td>🖥</td><td>LG 27GP950 4K</td><td class="price">¥3,299</td><td>¥3,499</td><td>¥3,599</td><td class="lowest"><span class="platform-tag tag-pdd">拼多多</span> ¥3,299</td></tr>
-        <tr><td>🎮</td><td>PS5 Pro 数字版</td><td class="price">¥4,799</td><td>¥4,999</td><td>¥5,199</td><td class="lowest"><span class="platform-tag tag-pdd">拼多多</span> ¥4,799</td></tr>
+        <tr><td><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></td><td>iPhone 17 128G</td><td class="price">¥5,299<span class="price-delta down"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="6 9 12 15 18 9"/></svg>80</span></td><td>¥5,499</td><td>¥5,599</td><td class="lowest"><span class="platform-tag tag-pdd">拼多多</span> ¥5,299</td></tr>
+        <tr><td><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></td><td>华为 Mate 80 256G</td><td class="price">¥4,099<span class="price-delta down"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="6 9 12 15 18 9"/></svg>100</span></td><td>¥4,199</td><td>¥4,299</td><td class="lowest"><span class="platform-tag tag-pdd">拼多多</span> ¥4,099</td></tr>
+        <tr><td><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="2" y1="20" x2="22" y2="20"/></svg></td><td>MacBook Air M4</td><td class="price">¥7,199</td><td>¥7,499<span class="price-delta down"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="6 9 12 15 18 9"/></svg>300</span></td><td>¥7,599</td><td class="lowest"><span class="platform-tag tag-pdd">拼多多</span> ¥7,199</td></tr>
+        <tr><td><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="2"/><circle cx="12" cy="12" r="4"/></svg></td><td>戴森 V16 Detect</td><td>¥3,699</td><td class="price">¥3,499<span class="price-delta down"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="6 9 12 15 18 9"/></svg>200</span></td><td>¥3,799</td><td class="lowest"><span class="platform-tag tag-tb">淘宝</span> ¥3,499</td></tr>
+        <tr><td><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/></svg></td><td>LG 27GP950 4K</td><td class="price">¥3,299</td><td>¥3,499</td><td>¥3,599</td><td class="lowest"><span class="platform-tag tag-pdd">拼多多</span> ¥3,299</td></tr>
+        <tr><td><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="6" width="20" height="12" rx="2"/><line x1="6" y1="11" x2="10" y2="11"/></svg></td><td>PS5 Pro 数字版</td><td class="price">¥4,799</td><td>¥4,999</td><td>¥5,199</td><td class="lowest"><span class="platform-tag tag-pdd">拼多多</span> ¥4,799</td></tr>
       </tbody>
     </table>
   </div>
 </section>
 
-<!-- Hot Articles -->
 <section>
   <div class="section-header">
     <div class="section-label">/// deep reviews</div>
-    <h2>深度评测</h2>
+    <h2><svg class="sec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>深度评测</h2>
     <p class="section-desc">不只列参数。真实体验、数据驱动、帮你做出最好的选择。</p>
   </div>
   <div class="grid">
     <a href="articles/2026-flagship-phone-comparison.html" class="card reveal">
       <div class="tags"><span class="tag tag-hot">HOT</span><span class="tag tag-ai">AI分析</span></div>
       <h3>2026年618旗舰手机怎么选？5款真旗舰横评</h3>
-      <div class="meta">05.28 · 8 min</div>
+      <div class="meta">05.28 · 8 min read</div>
       <p>iPhone 17、华为Mate 80、小米17、OPPO Find X9、vivo X300。拍照/续航/性能/价格全维度PK。</p>
-      <span class="cta-row">阅读全文 →</span>
+      <span class="cta-row">阅读全文 <svg class="cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
     </a>
     <a href="articles/student-laptop-guide-2026.html" class="card reveal">
       <div class="tags"><span class="tag tag-deal">省钱</span><span class="tag tag-ai">AI分析</span></div>
       <h3>大学生笔记本选购终极指南：3000-8000元全价位</h3>
-      <div class="meta">05.27 · 10 min</div>
+      <div class="meta">05.27 · 10 min read</div>
       <p>按专业推荐：设计/编程/文科各有不同。附618价格预测和入手时机。</p>
-      <span class="cta-row">阅读全文 →</span>
+      <span class="cta-row">阅读全文 <svg class="cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
     </a>
     <a href="articles/anc-earbuds-ranking-2026.html" class="card reveal">
       <div class="tags"><span class="tag tag-new">NEW</span></div>
       <h3>2026降噪耳机天梯榜：从299到2999，实测20款</h3>
-      <div class="meta">05.26 · 12 min</div>
+      <div class="meta">05.26 · 12 min read</div>
       <p>AirPods Pro 3 vs 索尼XM7 vs 华为FreeBuds 7。降噪深度/音质/佩戴全维度PK。</p>
-      <span class="cta-row">阅读全文 →</span>
+      <span class="cta-row">阅读全文 <svg class="cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
     </a>
     <a href="articles/mid-range-phone-guide-2026.html" class="card reveal">
       <div class="tags"><span class="tag tag-deal">省钱</span></div>
       <h3>2000-3500元中端机选购：性能过剩时代怎么买最值</h3>
-      <div class="meta">05.26 · 7 min</div>
+      <div class="meta">05.26 · 7 min read</div>
       <p>红米K90、realme GT8、iQOO Neo 11。其实中端机才是大多数人的最优解。</p>
-      <span class="cta-row">阅读全文 →</span>
+      <span class="cta-row">阅读全文 <svg class="cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
     </a>
     <a href="articles/best-running-watch-2026.html" class="card reveal">
       <div class="tags"><span class="tag tag-hot">HOT</span></div>
       <h3>跑步党必看：2026最佳运动手表/手环评测</h3>
-      <div class="meta">05.25 · 7 min</div>
+      <div class="meta">05.25 · 7 min read</div>
       <p>Apple Watch Ultra 3、佳明Fenix 9、华为GT 6。GPS/心率/续航实测全公开。</p>
-      <span class="cta-row">阅读全文 →</span>
+      <span class="cta-row">阅读全文 <svg class="cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
     </a>
     <a href="articles/tablet-buying-guide-2026.html" class="card reveal">
       <div class="tags"><span class="tag tag-new">NEW</span></div>
       <h3>iPad还是安卓平板？2026学生党平板选购全攻略</h3>
-      <div class="meta">05.24 · 9 min</div>
+      <div class="meta">05.24 · 9 min read</div>
       <p>iPad Pro M5、华为MatePad Pro、小米平板8。学习/画画/影音不同需求不同选择。</p>
-      <span class="cta-row">阅读全文 →</span>
+      <span class="cta-row">阅读全文 <svg class="cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
     </a>
   </div>
 </section>
 
-<!-- New Categories -->
 <section>
   <div class="section-header">
     <div class="section-label">/// new categories</div>
-    <h2>品类扩展</h2>
+    <h2><svg class="sec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="8 12 12 8 16 12"/></svg>品类扩展</h2>
     <p class="section-desc">2026年最受关注的消费电子品类，持续加入中。</p>
   </div>
   <div class="grid">
     <a href="appliance.html" class="card reveal">
       <div class="tags"><span class="tag tag-hot">HOT</span><span class="tag tag-deal">618</span></div>
-      <h3>🏠 家电选购指南：空调/冰箱/洗烘/扫地机</h3>
-      <div class="meta">05.28 · 15 min</div>
+      <h3>家电选购指南：空调/冰箱/洗烘/扫地机</h3>
+      <div class="meta">05.28 · 15 min read</div>
       <p>618家电攻略：空调怎么选匹数？洗烘一体还是分体？扫地机器人哪个品牌最值？</p>
-      <span class="cta-row">查看选购指南 →</span>
+      <span class="cta-row">查看选购指南 <svg class="cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
     </a>
     <a href="monitor.html" class="card reveal">
       <div class="tags"><span class="tag tag-ai">AI分析</span></div>
-      <h3>🖥 显示器选购：4K/高刷/专业色准全价位</h3>
-      <div class="meta">05.28 · 10 min</div>
+      <h3>显示器选购：4K/高刷/专业色准全价位</h3>
+      <div class="meta">05.28 · 10 min read</div>
       <p>办公/游戏/设计，不同场景需要什么面板？2K vs 4K，高刷vs高色域，一篇讲透。</p>
-      <span class="cta-row">查看选购指南 →</span>
+      <span class="cta-row">查看选购指南 <svg class="cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
     </a>
     <a href="gaming.html" class="card reveal">
       <div class="tags"><span class="tag tag-hot">HOT</span><span class="tag tag-new">NEW</span></div>
-      <h3>🎮 游戏装备选购：主机/显卡/手柄/电竞椅</h3>
-      <div class="meta">05.28 · 12 min</div>
-      <p>PS5 Pro vs Xbox vs Switch 2怎么选？显卡4060/4070/4080差距多大？</p>
-      <span class="cta-row">查看选购指南 →</span>
+      <h3>游戏装备选购：主机/显卡/手柄/电竞椅</h3>
+      <div class="meta">05.28 · 12 min read</div>
+      <p>PS5 Pro vs Switch 2 vs Xbox怎么选？显卡4060/4070/4080差距多大？</p>
+      <span class="cta-row">查看选购指南 <svg class="cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
     </a>
   </div>
 </section>
 
-<!-- Stat Bar -->
 <div class="stat-bar reveal">
   <div class="stat-card"><div class="stat-num">12</div><div class="stat-label">覆盖品类</div></div>
   <div class="stat-card"><div class="stat-num">¥28K+</div><div class="stat-label">月均帮用户省钱</div></div>
@@ -311,44 +372,42 @@ footer a:hover{color:var(--text)}
   <div class="stat-card"><div class="stat-num">6</div><div class="stat-label">比价平台接入</div></div>
 </div>
 
-<!-- Features -->
 <section>
   <div class="section-header">
     <div class="section-label">/// why buysmart</div>
-    <h2>为什么用智选购</h2>
+    <h2><svg class="sec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>为什么用智选购</h2>
     <p class="section-desc">不只是一个比价工具，而是一套完整的智能选购系统。</p>
   </div>
   <div class="features">
     <div class="feature-card reveal">
-      <span class="feature-icon">⊹</span>
+      <div class="ft-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
       <h3>AI 实时比价</h3>
       <p>六平台价格每小时更新，自动标注最低价。告别手动比价的繁琐。</p>
     </div>
     <div class="feature-card reveal">
-      <span class="feature-icon">◈</span>
+      <div class="ft-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
       <h3>价格走势追踪</h3>
       <p>历史价格曲线一目了然，不再被"先涨后降"套路。618/双11心中有数。</p>
     </div>
     <div class="feature-card reveal">
-      <span class="feature-icon">⬡</span>
+      <div class="ft-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
       <h3>深度评测对比</h3>
       <p>1000+真实用户口碑数据驱动，告诉你参数之外的真实差距。</p>
     </div>
     <div class="feature-card reveal">
-      <span class="feature-icon">◉</span>
+      <div class="ft-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
       <h3>智能推荐引擎</h3>
       <p>告诉AI你的预算和需求，自动匹配最优选择。拒绝选择困难症。</p>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
 <div class="cta reveal">
   <h2>不错过每一次降价</h2>
   <p>每周推送最新比价数据和选购指南。只发干货，不打扰。</p>
   <div class="cta-form">
     <input type="email" placeholder="your@email.com">
-    <button>订阅周报</button>
+    <button><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>订阅周报</button>
   </div>
 </div>
 
@@ -362,36 +421,29 @@ footer a:hover{color:var(--text)}
 </footer>
 
 <script>
-// Animated Background
 const canvas=document.getElementById('bg-canvas'),ctx=canvas.getContext('2d');
 let particles=[],w,h;
 function resize(){w=canvas.width=window.innerWidth;h=canvas.height=window.innerHeight}
 resize();window.addEventListener('resize',resize);
-class Particle{constructor(){this.reset()}reset(){this.x=Math.random()*w;this.y=Math.random()*h;this.size=Math.random()*1.8+0.3;this.speedX=(Math.random()-0.5)*0.3;this.speedY=(Math.random()-0.5)*0.3;this.opacity=Math.random()*0.5+0.1}
+class Particle{constructor(){this.reset()}reset(){this.x=Math.random()*w;this.y=Math.random()*h;this.size=Math.random()*1.5+0.2;this.speedX=(Math.random()-0.5)*0.25;this.speedY=(Math.random()-0.5)*0.25;this.opacity=Math.random()*0.45+0.08}
 update(){this.x+=this.speedX;this.y+=this.speedY;if(this.x<0||this.x>w||this.y<0||this.y>h)this.reset()}
 draw(){ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.fillStyle=`rgba(124,92,231,${this.opacity})`;ctx.fill()}}
-for(let i=0;i<80;i++){let p=new Particle();p.x=Math.random()*w;p.y=Math.random()*h;particles.push(p)}
+for(let i=0;i<60;i++){let p=new Particle();p.x=Math.random()*w;p.y=Math.random()*h;particles.push(p)}
 function animate(){ctx.clearRect(0,0,w,h);particles.forEach(p=>{p.update();p.draw()});
-// Connect nearby particles
-for(let i=0;i<particles.length;i++){for(let j=i+1;j<particles.length;j++){let dx=particles[i].x-particles[j].x,dy=particles[i].y-particles[j].y;let dist=Math.sqrt(dx*dx+dy*dy);if(dist<120){ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(particles[j].x,particles[j].y);ctx.strokeStyle=`rgba(124,92,231,${0.04*(1-dist/120)})`;ctx.stroke()}}}
+for(let i=0;i<particles.length;i++){for(let j=i+1;j<particles.length;j++){let dx=particles[i].x-particles[j].x,dy=particles[i].y-particles[j].y;let dist=Math.sqrt(dx*dx+dy*dy);if(dist<110){ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(particles[j].x,particles[j].y);ctx.strokeStyle=`rgba(124,92,231,${0.035*(1-dist/110)})`;ctx.stroke()}}}
 requestAnimationFrame(animate)}
 animate();
 
-// Mouse Glow
 const glow=document.getElementById('mouse-glow');
 document.addEventListener('mousemove',e=>{glow.style.left=e.clientX+'px';glow.style.top=e.clientY+'px';glow.style.opacity='1'});
 document.addEventListener('mouseleave',()=>{glow.style.opacity='0'});
 
-// Card mouse tracking for radial gradient
-document.querySelectorAll('.card').forEach(card=>{card.addEventListener('mousemove',e=>{const rect=card.getBoundingClientRect();card.style.setProperty('--mouse-x',(e.clientX-rect.left)+'px');card.style.setProperty('--mouse-y',(e.clientY-rect.top)+'px')})});
+document.querySelectorAll('.card').forEach(card=>{card.addEventListener('mousemove',e=>{const rect=card.getBoundingClientRect();card.style.setProperty('--mx',(e.clientX-rect.left)+'px');card.style.setProperty('--my',(e.clientY-rect.top)+'px')})});
 
-// Scroll reveal
 const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}})},{threshold:0.1});
 document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 
-// Counter animation
-const counterObserver=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const nums=e.target.querySelectorAll('.stat-num');nums.forEach(n=>{const target=parseInt(n.textContent.replace(/\D/g,''));if(!target)return;let current=0;const step=target/30;const timer=setInterval(()=>{current+=step;if(current>=target){n.textContent=n.textContent.replace(/\d+/,target);clearInterval(timer)}else{n.textContent=n.textContent.replace(/\d+/,Math.floor(current))}},40)})}})
-},{threshold:0.3});
+const counterObserver=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const nums=e.target.querySelectorAll('.stat-num');nums.forEach(n=>{const target=parseInt(n.textContent.replace(/[^\d]/g,''));if(!target)return;let current=0;const step=target/25;const timer=setInterval(()=>{current+=step;if(current>=target){n.textContent=n.textContent.replace(/\d+/,target);clearInterval(timer)}else{n.textContent=n.textContent.replace(/\d+/,Math.floor(current))}},40)})}})},{threshold:0.3});
 document.querySelectorAll('.stat-bar').forEach(el=>counterObserver.observe(el));
 </script>
 </body>
