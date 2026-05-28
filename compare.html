@@ -177,8 +177,8 @@ footer a{color:var(--t2);text-decoration:none}
 // JD Affiliate
 const JD_PID = '2038203081_4105199281_3105626410';
 const TB_PID = '3418000173';
-function jdSearch(kw){ return 'https://search.jd.com/Search?keyword='+encodeURIComponent(kw)+'&enc=utf-8'; }
-function tbSearch(kw){ return 'https://s.taobao.com/search?q='+encodeURIComponent(kw); }
+function jdSearch(kw){ return 'https://so.m.jd.com/ware/search.action?keyword='+encodeURIComponent(kw); }
+function tbSearch(kw){ return 'https://s.taobao.com/search?q='+encodeURIComponent(kw)+'&pid='+TB_PID; }
 // ============ DATA ============
 const allProducts = [
   // 手机
