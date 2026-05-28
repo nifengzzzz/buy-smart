@@ -233,6 +233,47 @@ const allProducts = [
   {cat:'tablet',catName:'平板',name:'iPad Air M4 11"',pdd:4599,tb:4799,jd:4999,delta:[100,0,0]},
   {cat:'tablet',catName:'平板',name:'华为 MatePad Pro 12.2',pdd:4099,tb:4299,jd:4499,delta:[0,0,0]},
   {cat:'tablet',catName:'平板',name:'小米平板 8',pdd:2599,tb:2799,jd:2899,delta:[100,0,0]},
+  // 相机/摄影
+  {cat:'camera',catName:'相机/摄影',name:'索尼 A7M5 机身',pdd:15999,tb:16499,jd:16999,delta:[0,0,0]},
+  {cat:'camera',catName:'相机/摄影',name:'佳能 EOS R6 III',pdd:13999,tb:14499,jd:14999,delta:[0,0,0]},
+  {cat:'camera',catName:'相机/摄影',name:'富士 X-T6',pdd:9999,tb:10499,jd:10999,delta:[0,0,0]},
+  {cat:'camera',catName:'相机/摄影',name:'DJI Pocket 4',pdd:2999,tb:3199,jd:3299,delta:[0,0,0]},
+  {cat:'camera',catName:'相机/摄影',name:'DJI Mini 5 Pro',pdd:3999,tb:4299,jd:4499,delta:[0,0,0]},
+  {cat:'camera',catName:'相机/摄影',name:'GoPro Hero 14',pdd:2699,tb:2899,jd:2999,delta:[0,0,0]},
+  {cat:'camera',catName:'相机/摄影',name:'索尼 FE 24-70mm F2.8 GM3',pdd:11999,tb:12499,jd:12999,delta:[0,0,0]},
+  // 键鼠外设
+  {cat:'keyboard',catName:'键鼠外设',name:'罗技 MX Keys S 键盘',pdd:649,tb:699,jd:749,delta:[0,0,0]},
+  {cat:'keyboard',catName:'键鼠外设',name:'罗技 MX Master 4S 鼠标',pdd:649,tb:699,jd:749,delta:[0,0,0]},
+  {cat:'keyboard',catName:'键鼠外设',name:'Keychron Q3 Max 机械键盘',pdd:799,tb:869,jd:899,delta:[0,0,0]},
+  {cat:'keyboard',catName:'键鼠外设',name:'雷蛇 Viper V3 Pro 鼠标',pdd:899,tb:949,jd:999,delta:[0,0,0]},
+  {cat:'keyboard',catName:'键鼠外设',name:'罗技 G Pro X Superlight 3',pdd:1099,tb:1199,jd:1249,delta:[0,0,0]},
+  {cat:'keyboard',catName:'键鼠外设',name:'Wacom Intuos Pro M',pdd:2299,tb:2499,jd:2599,delta:[0,0,0]},
+  // 音箱/音响
+  {cat:'speaker',catName:'音箱/音响',name:'HomePod 2',pdd:2099,tb:2199,jd:2299,delta:[0,0,0]},
+  {cat:'speaker',catName:'音箱/音响',name:'Bose SoundLink Max',pdd:2999,tb:3199,jd:3299,delta:[0,0,0]},
+  {cat:'speaker',catName:'音箱/音响',name:'JBL Charge 6',pdd:1099,tb:1199,jd:1299,delta:[0,0,0]},
+  {cat:'speaker',catName:'音箱/音响',name:'Marshall Stanmore III',pdd:2299,tb:2499,jd:2599,delta:[0,0,0]},
+  {cat:'speaker',catName:'音箱/音响',name:'漫步者 S3000MKIII',pdd:1999,tb:2199,jd:2299,delta:[0,0,0]},
+  {cat:'speaker',catName:'音箱/音响',name:'索尼 SRS-XG300',pdd:1299,tb:1399,jd:1499,delta:[0,0,0]},
+  // 存储设备
+  {cat:'storage',catName:'存储设备',name:'三星 T9 2TB 移动固态',pdd:1199,tb:1299,jd:1399,delta:[0,0,0]},
+  {cat:'storage',catName:'存储设备',name:'闪迪 Extreme Pro 1TB SD卡',pdd:899,tb:949,jd:999,delta:[0,0,0]},
+  {cat:'storage',catName:'存储设备',name:'西部数据 My Book 8TB',pdd:1299,tb:1399,jd:1499,delta:[0,0,0]},
+  {cat:'storage',catName:'存储设备',name:'闪迪 CZ880 1TB U盘',pdd:649,tb:699,jd:749,delta:[0,0,0]},
+  {cat:'storage',catName:'存储设备',name:'三星 PRO Plus 512G TF卡',pdd:249,tb:279,jd:299,delta:[0,0,0]},
+  {cat:'storage',catName:'存储设备',name:'群晖 DS224+ NAS',pdd:2299,tb:2399,jd:2499,delta:[0,0,0]},
+  // 移动电源/充电
+  {cat:'powerbank',catName:'移动电源',name:'Anker Prime 240W 充电宝',pdd:599,tb:649,jd:699,delta:[0,0,0]},
+  {cat:'powerbank',catName:'移动电源',name:'小米 充电宝 20000mAh',pdd:149,tb:169,jd:189,delta:[0,0,0]},
+  {cat:'powerbank',catName:'移动电源',name:'Anker GaNPrime 100W 充电器',pdd:299,tb:329,jd:349,delta:[0,0,0]},
+  {cat:'powerbank',catName:'移动电源',name:'绿联 300W 户外电源',pdd:1999,tb:2199,jd:2399,delta:[0,0,0]},
+  {cat:'powerbank',catName:'移动电源',name:'倍思 65W 车充',pdd:79,tb:89,jd:99,delta:[0,0,0]},
+  // 投影仪
+  {cat:'projector',catName:'投影仪',name:'极米 RS 5 Ultra',pdd:5999,tb:6499,jd:6799,delta:[0,0,0]},
+  {cat:'projector',catName:'投影仪',name:'当贝 X6 Pro',pdd:4999,tb:5299,jd:5499,delta:[0,0,0]},
+  {cat:'projector',catName:'投影仪',name:'坚果 N3 Ultra',pdd:4299,tb:4599,jd:4799,delta:[0,0,0]},
+  {cat:'projector',catName:'投影仪',name:'小明 Q5 Pro',pdd:1799,tb:1999,jd:2099,delta:[0,0,0]},
+  {cat:'projector',catName:'投影仪',name:'爱普生 CH-TW7000',pdd:8499,tb:8999,jd:9299,delta:[0,0,0]},
 ];
 
 // ============ STATE ============
@@ -241,7 +282,7 @@ let searchQuery = '';
 let selected = []; // indices into allProducts
 
 // ============ RENDER ============
-const catIcons = {phone:'📱',laptop:'💻',earphone:'🎧',appliance:'🏠',monitor:'🖥',gaming:'🎮',smarthome:'🤖',watch:'⌚',tablet:'📋'};
+const catIcons = {phone:'📱',laptop:'💻',earphone:'🎧',appliance:'🏠',monitor:'🖥',gaming:'🎮',smarthome:'🤖',watch:'⌚',tablet:'📋',camera:'📷',keyboard:'⌨️',speaker:'🔊',storage:'💾',powerbank:'🔋',projector:'📽️'};
 
 function renderPills(){
   const cats = ['all',...new Set(allProducts.map(p=>p.cat))];
