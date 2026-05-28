@@ -277,7 +277,7 @@ const allProducts = [
 ];
 
 // ============ STATE ============
-let activeFilter = 'all';
+let activeFilters = new Set(); // multi-select
 let searchQuery = '';
 let selected = []; // indices into allProducts
 
@@ -285,24 +285,27 @@ let selected = []; // indices into allProducts
 const catIcons = {phone:'📱',laptop:'💻',earphone:'🎧',appliance:'🏠',monitor:'🖥',gaming:'🎮',smarthome:'🤖',watch:'⌚',tablet:'📋',camera:'📷',keyboard:'⌨️',speaker:'🔊',storage:'💾',powerbank:'🔋',projector:'📽️'};
 
 function renderPills(){
-  const cats = ['all',...new Set(allProducts.map(p=>p.cat))];
-  const names = {all:'全部'};
-  const counts = {};
-  cats.forEach(c=>{
-    counts[c] = c==='all'?allProducts.length:allProducts.filter(p=>p.cat===c).length;
-    if(c!=='all') names[c]=allProducts.find(p=>p.cat===c).catName;
-  });
-  document.getElementById('catPills').innerHTML = cats.map(c=>`
-    <div class="cat-pill${activeFilter===c?' active':''}" onclick="setFilter('${c}')">
-      ${c==='all'?'':catIcons[c]||''} ${names[c]}
-      <span class="count">${counts[c]}</span>
+  const cats = [...new Set(allProducts.map(p=>p.cat))];
+  const names = {};
+  cats.forEach(c=>{names[c]=allProducts.find(p=>p.cat===c).catName;});
+  document.getElementById('catPills').innerHTML = `
+    <div class="cat-pill${activeFilters.size===0?' active':''}" onclick="toggleFilter('all')">
+      全部
+      <span class="count">${allProducts.length}</span>
     </div>
-  `).join('');
+  ` + cats.map(c=>{
+    const active = activeFilters.has(c);
+    const count = allProducts.filter(p=>p.cat===c).length;
+    return `<div class="cat-pill${active?' active':''}" onclick="toggleFilter('${c}')">
+      ${catIcons[c]||''} ${names[c]}
+      <span class="count">${count}</span>
+    </div>`;
+  }).join('');
 }
 
 function renderProducts(){
   let items = [...allProducts];
-  if(activeFilter!=='all') items = items.filter(p=>p.cat===activeFilter);
+  if(activeFilters.size>0) items = items.filter(p=>activeFilters.has(p.cat));
   if(searchQuery){
     const q = searchQuery.toLowerCase();
     items = items.filter(p=>p.name.toLowerCase().includes(q)||p.catName.includes(q));
@@ -396,7 +399,11 @@ function runCompare(){
 }
 
 // ============ ACTIONS ============
-function setFilter(cat){activeFilter=cat;renderPills();renderProducts()}
+function toggleFilter(cat){
+  if(cat==='all'){activeFilters.clear();}
+  else{if(activeFilters.has(cat))activeFilters.delete(cat);else activeFilters.add(cat)}
+  renderPills();renderProducts();
+}
 function toggleSelect(idx){
   const pos = selected.indexOf(idx);
   if(pos>=0)selected.splice(pos,1);else if(selected.length<6)selected.push(idx);
