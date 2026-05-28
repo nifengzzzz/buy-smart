@@ -174,6 +174,9 @@ footer a{color:var(--t2);text-decoration:none}
 <footer><div class="container"><p>© 2026 <a href="index.html">BuySmart</a> · 数据每12小时自动更新 · 价格仅供参考</p></div></footer>
 
 <script>
+// JD Affiliate
+const JD_PID = '2038203081_4105199281_3105626410';
+function jdSearch(kw){ return 'https://search.jd.com/Search?keyword='+encodeURIComponent(kw)+'&enc=utf-8'; }
 // ============ DATA ============
 const allProducts = [
   // 手机
@@ -331,7 +334,7 @@ function renderProducts(){
       <div class="price-row">
         <div class="price-item${p.pdd===min?' best':''}"><span class="plabel">拼多多</span><span class="pval">¥${p.pdd.toLocaleString()}</span></div>
         <div class="price-item${p.tb===min?' best':''}"><span class="plabel">淘宝</span><span class="pval">¥${p.tb.toLocaleString()}</span></div>
-        <div class="price-item${p.jd===min?' best':''}"><span class="plabel">京东</span><span class="pval">¥${p.jd.toLocaleString()}</span></div>
+        <div class="price-item${p.jd===min?' best':''}" onclick="event.stopPropagation();window.open(jdSearch('${encodeURIComponent(p.name)}'),'_blank')" style="cursor:pointer" title="在京东搜索此商品"><span class="plabel">京东</span><span class="pval">¥${p.jd.toLocaleString()}</span></div>
       </div>
     </div>`;
   }).join('');
