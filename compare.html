@@ -1,82 +1,85 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>实时比价 - 智选购</title>
-    <meta name="description" content="京东、淘宝、拼多多、1688 四大平台实时比价。每天更新，帮你找到最低价。">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; line-height: 1.6; color: #333; background: #f8f9fa; }
-        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
-        header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px 0; margin-bottom: 30px; text-align: center; }
-        header h1 { font-size: 1.8em; }
-        nav { margin-bottom: 20px; }
-        nav a { color: #667eea; text-decoration: none; margin-right: 15px; }
-        .price-table { width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 30px; }
-        .price-table th { background: #667eea; color: white; padding: 12px 15px; text-align: left; }
-        .price-table td { padding: 12px 15px; border-bottom: 1px solid #eee; }
-        .price-table .lowest { background: #e8f5e9; font-weight: 700; color: #2e7d32; }
-        .platform-tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.8em; margin-right: 4px; }
-        .tag-jd { background: #ffe0e0; color: #c0392b; }
-        .tag-tb { background: #fff0e0; color: #e67e22; }
-        .tag-pdd { background: #ffe0f0; color: #e91e63; }
-        .tag-1688 { background: #e0f0ff; color: #2980b9; }
-        footer { text-align: center; padding: 30px; color: #999; }
-        footer a { color: #667eea; }
-    </style>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>实时比价 - 智选购</title>
+<meta name="description" content="京东、淘宝、拼多多、1688四大平台实时比价。手机、笔记本、耳机每天更新最低价。">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0f;--bg-card:rgba(255,255,255,0.03);--border:rgba(255,255,255,0.06);--text:#e8e8ed;--text-secondary:#8888a0;--text-dim:#5a5a72;--accent:#6c5ce7;--accent2:#00cec9;--green:#00b894;--red:#ff6b6b;--radius:16px;--transition:0.25s cubic-bezier(0.4,0,0.2,1)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;background-image:radial-gradient(ellipse 80% 50% at 50% -20%,rgba(108,92,231,0.06),transparent)}
+.container{max-width:1100px;margin:0 auto;padding:0 24px}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,15,0.8);backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid var(--border)}
+nav .container{display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{font-weight:800;font-size:1.25rem;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none}
+.nav-links{display:flex;gap:8px}
+.nav-links a{color:var(--text-secondary);text-decoration:none;font-size:0.875rem;font-weight:500;padding:6px 14px;border-radius:8px;transition:var(--transition)}
+.nav-links a:hover{color:var(--text);background:var(--bg-card)}
+.nav-links a.active{color:var(--accent2);background:rgba(0,206,201,0.08)}
+header{padding:120px 0 40px;text-align:center}
+header h1{font-size:clamp(2rem,5vw,3rem);font-weight:800;letter-spacing:-0.03em;margin-bottom:12px}
+header p{color:var(--text-secondary)}
+h2{font-size:1.3rem;font-weight:700;margin:30px 0 16px;padding-left:12px;border-left:3px solid var(--accent)}
+.price-wrap{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:30px;backdrop-filter:blur(10px)}
+table{width:100%;border-collapse:collapse}
+th{text-align:left;padding:14px 20px;font-size:0.75rem;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.06em;border-bottom:1px solid var(--border);font-family:'JetBrains Mono',monospace;background:rgba(255,255,255,0.015)}
+td{padding:14px 20px;font-size:0.9rem;border-bottom:1px solid var(--border);color:var(--text-secondary);transition:var(--transition)}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(255,255,255,0.03)}
+.price{font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--red)}
+.lowest{font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--green)}
+.platform-tag{display:inline-block;padding:3px 10px;border-radius:6px;font-size:0.75rem;font-weight:600}
+.tag-pdd{background:rgba(255,107,107,0.12);color:#ff6b6b}
+.tag-jd{background:rgba(0,184,148,0.12);color:#00b894}
+.tag-tb{background:rgba(253,203,110,0.12);color:#fdcb6e}
+.disclaimer{color:var(--text-dim);font-size:0.8rem;text-align:center;margin:30px 0}
+footer{border-top:1px solid var(--border);padding:32px 0;text-align:center;color:var(--text-dim);font-size:0.8rem}
+footer a{color:var(--text-secondary);text-decoration:none}
+@media(max-width:600px){.price-wrap{overflow-x:auto}table{min-width:500px}}
+</style>
 </head>
 <body>
-<header>
-    <div class="container">
-        <h1>📊 实时比价</h1>
-        <p style="opacity:0.8;margin-top:5px;">数据更新于 2026-05-27 · 京东 / 淘宝 / 拼多多 / 1688</p>
-    </div>
-</header>
+<nav><div class="container"><a href="index.html" class="logo">BuySmart</a><div class="nav-links"><a href="index.html">首页</a><a href="phone.html">手机</a><a href="laptop.html">笔记本</a><a href="earphone.html">耳机</a><a href="watch.html">穿戴</a><a href="compare.html" class="active">比价</a></div></div></nav>
+<header><div class="container"><h1>📊 实时比价</h1><p>AI 每日扫描四大平台 · 数据更新于 2026-05-27</p></div></header>
+<main class="container">
 
-<div class="container">
-    <nav><a href="index.html">← 返回首页</a></nav>
+<h2>📱 热门手机</h2>
+<div class="price-wrap"><table>
+<thead><tr><th>商品</th><th>拼多多</th><th>淘宝</th><th>京东</th><th>最低价</th></tr></thead>
+<tbody>
+<tr><td>iPhone 17 128G</td><td class="price">¥5,299</td><td>¥5,499</td><td>¥5,599</td><td class="lowest"><span class="platform-tag tag-pdd">拼多多</span> ¥5,299</td></tr>
+<tr><td>iPhone 17 Pro 256G</td><td>¥7,499</td><td>¥7,299</td><td class="price">¥6,999</td><td class="lowest"><span class="platform-tag tag-jd">京东</span> ¥6,999</td></tr>
+<tr><td>华为 Mate 80 256G</td><td class="price">¥4,099</td><td>¥4,199</td><td>¥4,299</td><td class="lowest"><span class="platform-tag tag-pdd">拼多多</span> ¥4,099</td></tr>
+<tr><td>小米 17 256G</td><td class="price">¥3,599</td><td>¥3,699</td><td>¥3,849</td><td class="lowest"><span class="platform-tag tag-pdd">拼多多</span> ¥3,599</td></tr>
+<tr><td>OPPO Find X9 256G</td><td class="price">¥4,099</td><td>¥4,299</td><td>¥4,399</td><td class="lowest"><span class="platform-tag tag-pdd">拼多多</span> ¥4,099</td></tr>
+</tbody>
+</table></div>
 
-    <h2 style="margin-bottom:15px;">📱 热门手机比价</h2>
-    <table class="price-table">
-        <thead><tr><th>商品</th><th>拼多多</th><th>淘宝</th><th>京东</th><th>1688</th><th>最低价</th></tr></thead>
-        <tbody>
-            <tr><td>iPhone 17 128G</td><td>¥5,299</td><td>¥5,499</td><td>¥5,599</td><td>-</td><td class="lowest">拼多多 ¥5,299</td></tr>
-            <tr><td>iPhone 17 256G</td><td>¥5,899</td><td>¥5,999</td><td>¥6,099</td><td>-</td><td class="lowest">拼多多 ¥5,899</td></tr>
-            <tr><td>iPhone 17 Pro 256G</td><td>¥7,499</td><td>¥7,299</td><td>¥6,999</td><td>-</td><td class="lowest">京东 ¥6,999</td></tr>
-            <tr><td>华为 Mate 80 256G</td><td>¥4,099</td><td>¥4,199</td><td>¥4,299</td><td>-</td><td class="lowest">拼多多 ¥4,099</td></tr>
-            <tr><td>华为 Mate 80 Pro 512G</td><td>¥6,199</td><td>¥5,999</td><td>¥6,299</td><td>-</td><td class="lowest">淘宝 ¥5,999</td></tr>
-            <tr><td>小米 17 256G</td><td>¥3,599</td><td>¥3,699</td><td>¥3,849</td><td>-</td><td class="lowest">拼多多 ¥3,599</td></tr>
-            <tr><td>小米 15 Ultra 256G</td><td>¥4,299</td><td>¥4,599</td><td>¥4,399</td><td>-</td><td class="lowest">拼多多 ¥4,299</td></tr>
-            <tr><td>OPPO Find X9 256G</td><td>¥4,099</td><td>¥4,299</td><td>¥4,399</td><td>-</td><td class="lowest">拼多多 ¥4,099</td></tr>
-            <tr><td>vivo X300 256G</td><td>¥4,099</td><td>¥4,299</td><td>¥4,299</td><td>-</td><td class="lowest">拼多多 ¥4,099</td></tr>
-        </tbody>
-    </table>
+<h2>💻 热门笔记本</h2>
+<div class="price-wrap"><table>
+<thead><tr><th>商品</th><th>拼多多</th><th>淘宝</th><th>京东</th><th>最低价</th></tr></thead>
+<tbody>
+<tr><td>MacBook Air M4 256G</td><td class="price">¥7,199</td><td>¥7,499</td><td>¥7,599</td><td class="lowest"><span class="platform-tag tag-pdd">拼多多</span> ¥7,199</td></tr>
+<tr><td>MacBook Pro M4 Pro 512G</td><td>¥13,499</td><td class="price">¥12,999</td><td>¥13,999</td><td class="lowest"><span class="platform-tag tag-tb">淘宝</span> ¥12,999</td></tr>
+<tr><td>联想 拯救者 Y9000X</td><td class="price">¥7,299</td><td>¥7,499</td><td>¥7,699</td><td class="lowest"><span class="platform-tag tag-pdd">拼多多</span> ¥7,299</td></tr>
+<tr><td>ThinkBook 14+ 2026</td><td>¥5,799</td><td>¥5,999</td><td class="price">¥5,699</td><td class="lowest"><span class="platform-tag tag-jd">京东</span> ¥5,699</td></tr>
+</tbody>
+</table></div>
 
-    <h2 style="margin-bottom:15px;">💻 笔记本比价</h2>
-    <table class="price-table">
-        <thead><tr><th>商品</th><th>拼多多</th><th>淘宝</th><th>京东</th><th>1688</th><th>最低价</th></tr></thead>
-        <tbody>
-            <tr><td>MacBook Air M4 256G</td><td>¥7,199</td><td>¥7,499</td><td>¥7,599</td><td>-</td><td class="lowest">拼多多 ¥7,199</td></tr>
-            <tr><td>MacBook Pro M4 Pro 512G</td><td>¥13,499</td><td>¥12,999</td><td>¥13,999</td><td>-</td><td class="lowest">淘宝 ¥12,999</td></tr>
-            <tr><td>华为 MateBook X Pro 2026</td><td>¥8,499</td><td>¥8,299</td><td>¥8,999</td><td>-</td><td class="lowest">淘宝 ¥8,299</td></tr>
-            <tr><td>联想 ThinkPad X1 Carbon</td><td>¥9,299</td><td>¥8,999</td><td>¥9,499</td><td>-</td><td class="lowest">淘宝 ¥8,999</td></tr>
-        </tbody>
-    </table>
+<h2>🎧 热门耳机</h2>
+<div class="price-wrap"><table>
+<thead><tr><th>商品</th><th>拼多多</th><th>淘宝</th><th>京东</th><th>最低价</th></tr></thead>
+<tbody>
+<tr><td>AirPods Pro 3</td><td class="price">¥1,499</td><td>¥1,599</td><td>¥1,649</td><td class="lowest"><span class="platform-tag tag-pdd">拼多多</span> ¥1,499</td></tr>
+<tr><td>索尼 WF-1000XM7</td><td class="price">¥1,699</td><td>¥1,799</td><td>¥1,899</td><td class="lowest"><span class="platform-tag tag-pdd">拼多多</span> ¥1,699</td></tr>
+<tr><td>华为 FreeBuds 7 Pro</td><td class="price">¥1,199</td><td>¥1,299</td><td>¥1,349</td><td class="lowest"><span class="platform-tag tag-pdd">拼多多</span> ¥1,199</td></tr>
+<tr><td>小米 Buds 6 Pro</td><td class="price">¥599</td><td>¥649</td><td>¥699</td><td class="lowest"><span class="platform-tag tag-pdd">拼多多</span> ¥599</td></tr>
+</tbody>
+</table></div>
 
-    <h2 style="margin-bottom:15px;">🎧 热门耳机比价</h2>
-    <table class="price-table">
-        <thead><tr><th>商品</th><th>拼多多</th><th>淘宝</th><th>京东</th><th>1688</th><th>最低价</th></tr></thead>
-        <tbody>
-            <tr><td>AirPods Pro 3</td><td>¥1,499</td><td>¥1,599</td><td>¥1,649</td><td>-</td><td class="lowest">拼多多 ¥1,499</td></tr>
-            <tr><td>华为 FreeBuds 7 Pro</td><td>¥1,199</td><td>¥1,299</td><td>¥1,349</td><td>-</td><td class="lowest">拼多多 ¥1,199</td></tr>
-            <tr><td>小米 Buds 6 Pro</td><td>¥599</td><td>¥649</td><td>¥699</td><td>-</td><td class="lowest">拼多多 ¥599</td></tr>
-            <tr><td>索尼 WF-1000XM7</td><td>¥1,699</td><td>¥1,799</td><td>¥1,899</td><td>-</td><td class="lowest">拼多多 ¥1,699</td></tr>
-        </tbody>
-    </table>
-
-    <p style="color:#999;font-size:0.85em;text-align:center;margin:20px 0;">※ 价格为AI自动采集，可能存在延迟。实际价格以购买时平台显示为准。</p>
-</div>
-<footer><div class="container"><p>© 2026 <a href="index.html">智选购 BuySmart</a></p></div></footer>
+<p class="disclaimer">※ 价格为 AI 自动采集，可能存在延迟。实际价格以购买时平台显示为准。</p>
+</main>
+<footer><div class="container"><p>© 2026 <a href="index.html">BuySmart</a> · AI 驱动的数码选购引擎</p></div></footer>
 </body>
 </html>
