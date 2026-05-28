@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://nifengzzzz.github.io/buy-smart/sitemap.xml

@@ -1,240 +1,382 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>智选购 - AI驱动的数码产品选购指南 | 买对不买贵</title>
-    <meta name="description" content="智选购帮助你在海量数码产品中找到最适合的那一个。AI驱动的深度评测对比、真实用户口碑分析、价格走势追踪。手机、笔记本、耳机、智能穿戴，买对不买贵。">
-    <meta name="keywords" content="数码产品选购,手机推荐,笔记本推荐,耳机评测,智能手表,性价比,比价">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif; line-height: 1.6; color: #333; background: #f8f9fa; }
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
-        header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 60px 0 40px; }
-        header h1 { font-size: 2.2em; margin-bottom: 10px; }
-        header p { font-size: 1.1em; opacity: 0.9; }
-        nav { background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.08); padding: 15px 0; }
-        nav .container { display: flex; gap: 25px; flex-wrap: wrap; }
-        nav a { color: #555; text-decoration: none; font-weight: 500; }
-        nav a:hover { color: #667eea; }
-        .hero-stats { display: flex; gap: 30px; margin-top: 25px; flex-wrap: wrap; }
-        .hero-stat { background: rgba(255,255,255,0.15); border-radius: 8px; padding: 12px 20px; }
-        .hero-stat .num { font-size: 1.6em; font-weight: 700; }
-        .hero-stat .label { font-size: 0.85em; opacity: 0.8; }
-        section { margin: 40px 0; }
-        section h2 { font-size: 1.6em; margin-bottom: 20px; color: #333; border-left: 4px solid #667eea; padding-left: 12px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
-        .card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); transition: transform 0.2s, box-shadow 0.2s; }
-        .card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.12); }
-        .card-content { padding: 20px; }
-        .card h3 { font-size: 1.15em; margin-bottom: 8px; color: #222; }
-        .card .meta { font-size: 0.85em; color: #999; margin-bottom: 10px; }
-        .card p { font-size: 0.95em; color: #555; margin-bottom: 12px; }
-        .card .tag { display: inline-block; background: #eef0ff; color: #667eea; padding: 3px 10px; border-radius: 20px; font-size: 0.8em; margin-right: 6px; }
-        .card a { display: inline-block; color: #667eea; text-decoration: none; font-weight: 600; margin-top: 6px; }
-        .card a:hover { text-decoration: underline; }
-        .price-table { width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
-        .price-table th { background: #667eea; color: white; padding: 12px 15px; text-align: left; font-size: 0.9em; }
-        .price-table td { padding: 12px 15px; border-bottom: 1px solid #eee; font-size: 0.95em; }
-        .price-table tr:last-child td { border-bottom: none; }
-        .price-table .price { font-weight: 700; color: #e74c3c; font-size: 1.05em; }
-        .price-table .platform { color: #667eea; font-weight: 500; }
-        .newsletter { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 12px; padding: 35px; text-align: center; margin: 40px 0; }
-        .newsletter h3 { font-size: 1.4em; margin-bottom: 10px; }
-        .newsletter p { margin-bottom: 20px; opacity: 0.9; }
-        .newsletter input { padding: 12px 18px; border: none; border-radius: 25px; width: 280px; max-width: 80%; font-size: 1em; outline: none; }
-        .newsletter button { padding: 12px 25px; border: none; border-radius: 25px; background: #ff6b6b; color: white; font-size: 1em; font-weight: 600; cursor: pointer; margin-left: 8px; }
-        .newsletter button:hover { background: #e55a5a; }
-        footer { text-align: center; padding: 30px 0; color: #999; font-size: 0.85em; border-top: 1px solid #eee; margin-top: 40px; }
-        footer a { color: #667eea; }
-        .hot-badge { background: #ff6b6b; color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.75em; margin-left: 6px; animation: pulse 2s infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
-        .category-nav { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
-        .category-nav a { padding: 8px 18px; background: white; border-radius: 20px; text-decoration: none; color: #555; font-size: 0.9em; border: 1px solid #ddd; transition: all 0.2s; }
-        .category-nav a:hover, .category-nav a.active { background: #667eea; color: white; border-color: #667eea; }
-        @media (max-width: 600px) { header { padding: 35px 0 25px; } header h1 { font-size: 1.6em; } .grid { grid-template-columns: 1fr; } }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>智选购 — AI驱动的数码产品选购引擎</title>
+<meta name="description" content="智选购帮助你找到最值得买的数码产品。AI实时比价六大平台，深度评测、价格追踪、智能推荐。买对不买贵。">
+<meta name="keywords" content="数码选购,手机推荐,笔记本推荐,比价,智能推荐,AI选购">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0f;
+  --bg-card: rgba(255,255,255,0.03);
+  --bg-card-hover: rgba(255,255,255,0.06);
+  --border: rgba(255,255,255,0.06);
+  --border-hover: rgba(255,255,255,0.12);
+  --text: #e8e8ed;
+  --text-secondary: #8888a0;
+  --text-dim: #5a5a72;
+  --accent: #6c5ce7;
+  --accent-glow: rgba(108,92,231,0.25);
+  --accent2: #00cec9;
+  --green: #00b894;
+  --red: #ff6b6b;
+  --radius: 16px;
+  --radius-sm: 10px;
+  --transition: 0.25s cubic-bezier(0.4,0,0.2,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(108,92,231,0.08), transparent),
+    radial-gradient(ellipse 60% 40% at 80% 80%, rgba(0,206,201,0.04), transparent);
+  background-attachment: fixed;
+}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+/* Nav */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(10,10,15,0.8);
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  border-bottom:1px solid var(--border);
+}
+nav .container{
+  display:flex;align-items:center;justify-content:space-between;
+  height:60px;
+}
+.logo{
+  font-weight:800;font-size:1.25rem;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  letter-spacing:-0.02em;
+}
+.nav-links{display:flex;gap:8px;align-items:center}
+.nav-links a{
+  color:var(--text-secondary);text-decoration:none;font-size:0.875rem;
+  font-weight:500;padding:6px 14px;border-radius:8px;
+  transition:var(--transition);
+}
+.nav-links a:hover{color:var(--text);background:var(--bg-card)}
+.nav-links a.active{color:var(--accent2);background:rgba(0,206,201,0.08)}
+/* Hero */
+.hero{padding:140px 0 80px;text-align:center}
+.hero .badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:100px;padding:6px 16px;font-size:0.8rem;
+  color:var(--text-secondary);margin-bottom:24px;
+}
+.hero .badge .dot{width:7px;height:7px;border-radius:50%;background:var(--accent2);animation:pulse 3s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+.hero h1{
+  font-size:clamp(2.5rem,6vw,4rem);font-weight:800;
+  letter-spacing:-0.03em;line-height:1.15;margin-bottom:20px;
+  background:linear-gradient(135deg,var(--text) 0%,var(--text-secondary) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.hero h1 span{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{color:var(--text-secondary);font-size:1.15rem;max-width:540px;margin:0 auto 36px;line-height:1.7}
+.hero-stats{display:flex;justify-content:center;gap:40px;flex-wrap:wrap}
+.hero-stat{text-align:center}
+.hero-stat .num{font-family:'JetBrains Mono',monospace;font-size:2rem;font-weight:700;color:var(--accent2)}
+.hero-stat .label{font-size:0.8rem;color:var(--text-dim);margin-top:4px}
+/* Sections */
+section{padding:60px 0}
+.section-label{
+  font-family:'JetBrains Mono',monospace;font-size:0.75rem;font-weight:600;
+  color:var(--accent2);text-transform:uppercase;letter-spacing:0.1em;
+  margin-bottom:12px;
+}
+section h2{font-size:1.8rem;font-weight:700;margin-bottom:12px;letter-spacing:-0.02em}
+.section-desc{color:var(--text-secondary);margin-bottom:32px;max-width:600px}
+/* Price Table */
+.price-table-wrap{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:var(--radius);overflow:hidden;
+  backdrop-filter:blur(10px);
+}
+.price-table{width:100%;border-collapse:collapse}
+.price-table th{
+  text-align:left;padding:14px 20px;font-size:0.75rem;font-weight:600;
+  color:var(--text-dim);text-transform:uppercase;letter-spacing:0.06em;
+  border-bottom:1px solid var(--border);background:rgba(255,255,255,0.015);
+  font-family:'JetBrains Mono',monospace;
+}
+.price-table td{
+  padding:14px 20px;font-size:0.9rem;border-bottom:1px solid var(--border);
+  transition:var(--transition);
+}
+.price-table tr:last-child td{border-bottom:none}
+.price-table tr:hover td{background:var(--bg-card-hover)}
+.price-table .price{font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--red)}
+.price-table .lowest{
+  font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--green)
+}
+.price-table .platform-tag{
+  display:inline-block;padding:3px 10px;border-radius:6px;
+  font-size:0.75rem;font-weight:600;
+}
+.tag-pdd{background:rgba(255,107,107,0.12);color:#ff6b6b}
+.tag-jd{background:rgba(0,184,148,0.12);color:#00b894}
+.tag-tb{background:rgba(253,203,110,0.12);color:#fdcb6e}
+/* Cards Grid */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px}
+.card{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:var(--radius);padding:24px;
+  transition:var(--transition);position:relative;overflow:hidden;
+  backdrop-filter:blur(10px);
+}
+.card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.06),transparent);
+}
+.card:hover{
+  background:var(--bg-card-hover);border-color:var(--border-hover);
+  transform:translateY(-2px);
+  box-shadow:0 8px 32px rgba(0,0,0,0.3);
+}
+.card .tags{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap}
+.card .tag{
+  font-size:0.7rem;font-weight:600;padding:3px 10px;
+  border-radius:6px;letter-spacing:0.02em;
+}
+.tag-purple{background:rgba(108,92,231,0.15);color:var(--accent)}
+.tag-cyan{background:rgba(0,206,201,0.12);color:var(--accent2)}
+.tag-red{background:rgba(255,107,107,0.12);color:var(--red)}
+.tag-yellow{background:rgba(253,203,110,0.12);color:#fdcb6e}
+.card h3{font-size:1.05rem;font-weight:600;margin-bottom:8px;line-height:1.4}
+.card .meta{
+  font-family:'JetBrains Mono',monospace;font-size:0.75rem;
+  color:var(--text-dim);margin-bottom:12px;
+}
+.card p{font-size:0.875rem;color:var(--text-secondary);margin-bottom:16px;line-height:1.6}
+.card .read-more{
+  font-size:0.85rem;font-weight:600;color:var(--accent2);
+  text-decoration:none;display:inline-flex;align-items:center;gap:5px;
+  transition:var(--transition);
+}
+.card .read-more:hover{gap:10px;color:#fff}
+/* Features */
+.features{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.feature-card{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:var(--radius);padding:28px 24px;
+  transition:var(--transition);
+  backdrop-filter:blur(10px);
+}
+.feature-card:hover{
+  background:var(--bg-card-hover);border-color:var(--border-hover);
+  transform:translateY(-2px);
+}
+.feature-icon{font-size:2rem;margin-bottom:16px;display:block}
+.feature-card h3{font-size:1rem;font-weight:600;margin-bottom:8px}
+.feature-card p{font-size:0.85rem;color:var(--text-secondary);line-height:1.6}
+/* CTA */
+.cta{
+  background:linear-gradient(135deg,rgba(108,92,231,0.1),rgba(0,206,201,0.05));
+  border:1px solid var(--border);border-radius:var(--radius);
+  padding:48px;text-align:center;margin:40px 0;
+  backdrop-filter:blur(10px);
+}
+.cta h2{font-size:1.5rem;margin-bottom:12px}
+.cta p{color:var(--text-secondary);margin-bottom:24px}
+.cta-form{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.cta-form input{
+  background:rgba(255,255,255,0.04);border:1px solid var(--border);
+  border-radius:100px;padding:12px 20px;color:var(--text);
+  font-family:'Inter',sans-serif;font-size:0.9rem;width:300px;max-width:100%;
+  outline:none;transition:var(--transition);
+}
+.cta-form input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow)}
+.cta-form button{
+  background:linear-gradient(135deg,var(--accent),color-mix(in srgb,var(--accent) 70%,var(--accent2)));
+  border:none;border-radius:100px;padding:12px 28px;color:#fff;
+  font-family:'Inter',sans-serif;font-size:0.9rem;font-weight:600;
+  cursor:pointer;transition:var(--transition);
+}
+.cta-form button:hover{transform:translateY(-1px);box-shadow:0 4px 20px var(--accent-glow)}
+/* Footer */
+footer{
+  border-top:1px solid var(--border);padding:32px 0;
+  text-align:center;color:var(--text-dim);font-size:0.8rem;
+}
+footer a{color:var(--text-secondary);text-decoration:none;transition:var(--transition)}
+footer a:hover{color:var(--text)}
+/* Mobile */
+@media(max-width:768px){
+  .hero{padding:120px 0 60px}
+  .hero h1{font-size:2rem}
+  .hall{grid-template-columns:1fr}
+  .nav-links a{font-size:0.8rem;padding:4px 10px}
+  .grid{grid-template-columns:1fr}
+  .price-table-wrap{overflow-x:auto}
+  .price-table{min-width:600px}
+  .features{grid-template-columns:1fr}
+}
+</style>
 </head>
 <body>
 
-<header>
-    <div class="container">
-        <h1>🛒 智选购 BuySmart</h1>
-        <p>AI驱动的数码产品选购指南 · 买对不买贵</p>
-        <div class="hero-stats">
-            <div class="hero-stat"><div class="num">200+</div><div class="label">深度评测</div></div>
-            <div class="hero-stat"><div class="num">6平台</div><div class="label">实时比价</div></div>
-            <div class="hero-stat"><div class="num">AI驱动</div><div class="label">智能推荐</div></div>
-        </div>
-    </div>
-</header>
-
 <nav>
-    <div class="container">
-        <a href="index.html">🏠 首页</a>
-        <a href="phone.html">📱 手机</a>
-        <a href="laptop.html">💻 笔记本</a>
-        <a href="earphone.html">🎧 耳机</a>
-        <a href="watch.html">⌚ 智能穿戴</a>
-        <a href="compare.html">📊 实时比价</a>
+  <div class="container">
+    <div class="logo">BuySmart</div>
+    <div class="nav-links">
+      <a href="index.html" class="active">首页</a>
+      <a href="phone.html">手机</a>
+      <a href="laptop.html">笔记本</a>
+      <a href="earphone.html">耳机</a>
+      <a href="watch.html">穿戴</a>
+      <a href="compare.html">比价</a>
     </div>
+  </div>
 </nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="badge"><span class="dot"></span>AI 实时驱动 · 每日更新</div>
+    <h1>买对<span>不买贵</span></h1>
+    <p>AI 驱动的数码产品选购引擎。实时比价六平台，深度评测帮你决策，让每一分钱都花在刀刃上。</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num">6</div><div class="label">比价平台</div></div>
+      <div class="hero-stat"><div class="num">200+</div><div class="label">深度评测</div></div>
+      <div class="hero-stat"><div class="num">24h</div><div class="label">价格更新</div></div>
+    </div>
+  </div>
+</header>
 
 <main class="container">
 
-    <!-- 实时比价区 -->
-    <section>
-        <h2>📊 今日实时比价 <span class="hot-badge">HOT</span></h2>
-        <p style="margin-bottom:15px;color:#666;">AI每天扫描京东、淘宝、拼多多、1688，找出同款最低价。数据更新于 2026-05-27</p>
-        <table class="price-table">
-            <thead>
-                <tr><th>商品</th><th>拼多多</th><th>淘宝</th><th>京东</th><th>1688</th><th>最低</th></tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>iPhone 17 128G</td>
-                    <td class="price">¥5,299</td><td>¥5,499</td><td>¥5,599</td><td>-</td>
-                    <td class="platform">拼多多 ¥5,299</td>
-                </tr>
-                <tr>
-                    <td>华为 Mate 80 Pro</td>
-                    <td>¥6,999</td><td class="price">¥6,799</td><td>¥6,999</td><td>-</td>
-                    <td class="platform">淘宝 ¥6,799</td>
-                </tr>
-                <tr>
-                    <td>小米 16 Ultra</td>
-                    <td>¥5,999</td><td>¥5,999</td><td class="price">¥5,849</td><td>-</td>
-                    <td class="platform">京东 ¥5,849</td>
-                </tr>
-                <tr>
-                    <td>AirPods Pro 3</td>
-                    <td class="price">¥1,499</td><td>¥1,599</td><td>¥1,649</td><td>-</td>
-                    <td class="platform">拼多多 ¥1,499</td>
-                </tr>
-                <tr>
-                    <td>Apple Watch Ultra 3</td>
-                    <td>¥5,799</td><td class="price">¥5,599</td><td>¥5,899</td><td>-</td>
-                    <td class="platform">淘宝 ¥5,599</td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
+<!-- Price Table -->
+<section>
+  <div class="section-label">/// real-time pricing</div>
+  <h2>实时比价</h2>
+  <p class="section-desc">AI 每日扫描六大平台，锁定最低价。数据更新于 2026-05-27</p>
+  <div class="price-table-wrap">
+    <table class="price-table">
+      <thead>
+        <tr><th>商品</th><th>拼多多</th><th>淘宝</th><th>京东</th><th>最低价</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>iPhone 17 128G</td><td class="price">¥5,299</td><td>¥5,499</td><td>¥5,599</td><td class="lowest"><span class="platform-tag tag-pdd">拼多多</span> ¥5,299</td></tr>
+        <tr><td>华为 Mate 80 256G</td><td class="price">¥4,099</td><td>¥4,199</td><td>¥4,299</td><td class="lowest"><span class="platform-tag tag-pdd">拼多多</span> ¥4,099</td></tr>
+        <tr><td>小米 17 256G</td><td class="price">¥3,599</td><td>¥3,699</td><td>¥3,849</td><td class="lowest"><span class="platform-tag tag-pdd">拼多多</span> ¥3,599</td></tr>
+        <tr><td>MacBook Air M4</td><td class="price">¥7,199</td><td>¥7,499</td><td>¥7,599</td><td class="lowest"><span class="platform-tag tag-pdd">拼多多</span> ¥7,199</td></tr>
+        <tr><td>AirPods Pro 3</td><td class="price">¥1,499</td><td>¥1,599</td><td>¥1,649</td><td class="lowest"><span class="platform-tag tag-pdd">拼多多</span> ¥1,499</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
 
-    <!-- 热门选购指南 -->
-    <section>
-        <h2>🔥 热门选购指南</h2>
-        <div class="category-nav">
-            <a href="#" class="active">全部</a>
-            <a href="#">手机</a>
-            <a href="#">笔记本</a>
-            <a href="#">耳机</a>
-            <a href="#">智能穿戴</a>
-            <a href="#">平板</a>
-            <a href="#">显示器</a>
-        </div>
-        <div class="grid">
-            <!-- 文章1 -->
-            <div class="card">
-                <div class="card-content">
-                    <div><span class="tag">手机</span><span class="tag">旗舰</span></div>
-                    <h3>2026年618旗舰手机怎么选？5款真旗舰横评</h3>
-                    <div class="meta">📅 2026-05-27 · ⏱ 8分钟 · 👁 12,350阅读</div>
-                    <p>iPhone 17、华为Mate 80、小米16、OPPO Find X8、vivo X300 五大旗舰全面对比。拍照、续航、性能、价格，一篇讲透。</p>
-                    <a href="articles/2026-flagship-phone-comparison.html">阅读全文 →</a>
-                </div>
-            </div>
-            <!-- 文章2 -->
-            <div class="card">
-                <div class="card-content">
-                    <div><span class="tag">笔记本</span><span class="tag">性价比</span></div>
-                    <h3>大学生笔记本选购终极指南：3000-8000元全价位推荐</h3>
-                    <div class="meta">📅 2026-05-26 · ⏱ 10分钟 · 👁 18,720阅读</div>
-                    <p>按专业推荐：设计/编程/文科各有不同。轻薄本vs游戏本vs全能本怎么选？附618价格预测和入手时机。</p>
-                    <a href="articles/student-laptop-guide-2026.html">阅读全文 →</a>
-                </div>
-            </div>
-            <!-- 文章3 -->
-            <div class="card">
-                <div class="card-content">
-                    <div><span class="tag">耳机</span><span class="tag">降噪</span></div>
-                    <h3>2026降噪耳机天梯榜：从299到2999，实测20款告诉你该买哪个</h3>
-                    <div class="meta">📅 2026-05-25 · ⏱ 12分钟 · 👁 9,830阅读</div>
-                    <p>AirPods Pro 3 vs 索尼XM7 vs 华为FreeBuds 7 vs 小米Buds 6。降噪深度、音质、佩戴舒适度全维度PK。</p>
-                    <a href="articles/anc-earbuds-ranking-2026.html">阅读全文 →</a>
-                </div>
-            </div>
-            <!-- 文章4 -->
-            <div class="card">
-                <div class="card-content">
-                    <div><span class="tag">智能穿戴</span><span class="tag">运动</span></div>
-                    <h3>跑步党必看：2026最佳运动手表/手环评测</h3>
-                    <div class="meta">📅 2026-05-24 · ⏱ 7分钟 · 👁 6,450阅读</div>
-                    <p>Apple Watch Ultra 3、佳明Fenix 9、华为GT 6、小米手环10。GPS精度、心率监测、续航实测数据全公开。</p>
-                    <a href="articles/best-running-watch-2026.html">阅读全文 →</a>
-                </div>
-            </div>
-            <!-- 文章5 -->
-            <div class="card">
-                <div class="card-content">
-                    <div><span class="tag">手机</span><span class="tag">中端</span></div>
-                    <h3>2000-3500元中端机选购指南：性能过剩时代怎么买最值</h3>
-                    <div class="meta">📅 2026-05-23 · ⏱ 8分钟 · 👁 14,200阅读</div>
-                    <p>红米K90、realme GT8、iQOO Neo 11、一加Ace 6横评。其实中端机才是大多数人的最优解。</p>
-                    <a href="articles/mid-range-phone-guide-2026.html">阅读全文 →</a>
-                </div>
-            </div>
-            <!-- 文章6 -->
-            <div class="card">
-                <div class="card-content">
-                    <div><span class="tag">平板</span><span class="tag">学习</span></div>
-                    <h3>iPad还是安卓平板？2026年学生党/画画党平板选购全攻略</h3>
-                    <div class="meta">📅 2026-05-22 · ⏱ 9分钟 · 👁 11,080阅读</div>
-                    <p>iPad Pro M5、华为MatePad Pro、小米平板8、三星Tab S11。学习笔记/画画/影音娱乐，不同需求不同选择。</p>
-                    <a href="articles/tablet-buying-guide-2026.html">阅读全文 →</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 比价工具介绍 -->
-    <section>
-        <h2>🛠 为什么智选购能帮你省钱？</h2>
-        <div class="grid">
-            <div class="card"><div class="card-content">
-                <h3>🤖 AI实时比价</h3>
-                <p>每天扫描京东、淘宝、拼多多、1688四大平台价格，自动标注最低价。再也不用手动比来比去。</p>
-            </div></div>
-            <div class="card"><div class="card-content">
-                <h3>📊 价格走势追踪</h3>
-                <p>记录每个商品的历史价格曲线，一眼看出是真优惠还是先涨后降。618/双11不再被套路。</p>
-            </div></div>
-            <div class="card"><div class="card-content">
-                <h3>📝 深度评测对比</h3>
-                <p>不只列参数，更注重真实体验。结合1000+用户口碑数据，告诉你参数之外的真实差距。</p>
-            </div></div>
-            <div class="card"><div class="card-content">
-                <h3>🎯 个性化推荐</h3>
-                <p>告诉AI你的需求和预算，自动匹配最适合的产品。不用在海量型号里迷失方向。</p>
-            </div></div>
-        </div>
-    </section>
-
-    <!-- 订阅 -->
-    <div class="newsletter">
-        <h3>📬 不想每次都来查？</h3>
-        <p>订阅智选购周报，每周推送最新比价数据和选购指南。不打扰，只发干货。</p>
-        <input type="email" placeholder="输入你的邮箱">
-        <button>免费订阅</button>
+<!-- Articles -->
+<section>
+  <div class="section-label">/// deep reviews</div>
+  <h2>深度评测</h2>
+  <p class="section-desc">不只列参数。真实体验、数据驱动、帮你做出最好的选择。</p>
+  <div class="grid">
+    <div class="card">
+      <div class="tags"><span class="tag tag-red">热门</span><span class="tag tag-purple">手机</span></div>
+      <h3>2026年618旗舰手机怎么选？5款真旗舰横评</h3>
+      <div class="meta">05.27 · 8 min read</div>
+      <p>iPhone 17、华为 Mate 80、小米 17、OPPO Find X9、vivo X300。拍照、续航、性能、价格全维度 PK。</p>
+      <a href="articles/2026-flagship-phone-comparison.html" class="read-more">阅读全文 →</a>
     </div>
+    <div class="card">
+      <div class="tags"><span class="tag tag-cyan">性价比</span><span class="tag tag-purple">手机</span></div>
+      <h3>2000-3500元中端机选购指南：性能过剩时代怎么买最值</h3>
+      <div class="meta">05.26 · 7 min read</div>
+      <p>红米 K90、realme GT8、iQOO Neo 11、一加 Ace 6 横评。其实中端机才是大多数人的最优解。</p>
+      <a href="articles/mid-range-phone-guide-2026.html" class="read-more">阅读全文 →</a>
+    </div>
+    <div class="card">
+      <div class="tags"><span class="tag tag-cyan">性价比</span><span class="tag tag-purple">笔记本</span></div>
+      <h3>大学生笔记本选购指南：3000-8000元全价位推荐</h3>
+      <div class="meta">05.25 · 10 min read</div>
+      <p>按专业推荐：设计/编程/文科各有不同。附618价格预测和入手时机。</p>
+      <a href="articles/student-laptop-guide-2026.html" class="read-more">阅读全文 →</a>
+    </div>
+    <div class="card">
+      <div class="tags"><span class="tag tag-yellow">新品</span><span class="tag tag-purple">耳机</span></div>
+      <h3>2026降噪耳机天梯榜：从299到2999，实测20款</h3>
+      <div class="meta">05.24 · 12 min read</div>
+      <p>AirPods Pro 3 vs 索尼 XM7 vs 华为 FreeBuds 7。降噪深度、音质、佩戴全维度 PK。</p>
+      <a href="articles/anc-earbuds-ranking-2026.html" class="read-more">阅读全文 →</a>
+    </div>
+    <div class="card">
+      <div class="tags"><span class="tag tag-red">热门</span><span class="tag tag-purple">穿戴</span></div>
+      <h3>跑步党必看：2026最佳运动手表/手环评测</h3>
+      <div class="meta">05.23 · 7 min read</div>
+      <p>Apple Watch Ultra 3、佳明 Fenix 9、华为 GT 6。GPS 精度、心率监测、续航数据全公开。</p>
+      <a href="articles/best-running-watch-2026.html" class="read-more">阅读全文 →</a>
+    </div>
+    <div class="card">
+      <div class="tags"><span class="tag tag-cyan">性价比</span><span class="tag tag-purple">平板</span></div>
+      <h3>iPad 还是安卓平板？2026学生党选购全攻略</h3>
+      <div class="meta">05.22 · 9 min read</div>
+      <p>iPad Pro M5、华为 MatePad Pro、小米平板 8。学习笔记/画画/影音不同需求不同选择。</p>
+      <a href="articles/tablet-buying-guide-2026.html" class="read-more">阅读全文 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section>
+  <div class="section-label">/// why buysmart</div>
+  <h2>为什么用智选购</h2>
+  <p class="section-desc">不只是一个比价工具，而是一套完整的智能选购系统。</p>
+  <div class="features">
+    <div class="feature-card">
+      <span class="feature-icon">⊹</span>
+      <h3>AI 实时比价</h3>
+      <p>六平台价格每小时更新，自动标注最低价。告别手动比价的繁琐。</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">◈</span>
+      <h3>价格走势追踪</h3>
+      <p>历史价格曲线一目了然，不再被「先涨后降」套路。618/双11 心中有数。</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">⬡</span>
+      <h3>深度评测对比</h3>
+      <p>1000+ 真实用户口碑数据驱动，告诉你参数之外的真实差距。</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">◉</span>
+      <h3>智能推荐引擎</h3>
+      <p>告诉 AI 你的预算和需求，自动匹配最优选择。拒绝选择困难症。</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta">
+  <h2>不错过每一次降价</h2>
+  <p>每周推送最新比价数据和选购指南。只发干货，不打扰。</p>
+  <div class="cta-form">
+    <input type="email" placeholder="your@email.com">
+    <button>订阅周报</button>
+  </div>
+</div>
 
 </main>
 
 <footer>
-    <div class="container">
-        <p>© 2026 智选购 BuySmart · AI驱动的数码产品选购指南</p>
-        <p style="margin-top:5px;">本站内容由AI辅助生成，仅供参考。购买决策请结合自身需求。</p>
-        <p style="margin-top:8px;"><a href="#">关于我们</a> · <a href="#">免责声明</a> · <a href="#">合作联系</a></p>
-    </div>
+  <div class="container">
+    <p>© 2026 <a href="index.html">BuySmart</a> · AI 驱动的数码选购引擎</p>
+    <p style="margin-top:6px"><a href="#">关于</a> · <a href="#">隐私</a> · <a href="#">联系</a></p>
+  </div>
 </footer>
 
 </body>
