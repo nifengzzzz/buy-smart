@@ -1,15 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://nifengzzzz.github.io/buy-smart/</loc><changefreq>daily</changefreq><priority>1.0</priority></url>
+  <url><loc>https://nifengzzzz.github.io/buy-smart/compare.html</loc><changefreq>daily</changefreq><priority>0.9</priority></url>
   <url><loc>https://nifengzzzz.github.io/buy-smart/phone.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://nifengzzzz.github.io/buy-smart/laptop.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://nifengzzzz.github.io/buy-smart/earphone.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nifengzzzz.github.io/buy-smart/appliance.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nifengzzzz.github.io/buy-smart/monitor.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nifengzzzz.github.io/buy-smart/gaming.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nifengzzzz.github.io/buy-smart/smarthome.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://nifengzzzz.github.io/buy-smart/watch.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://nifengzzzz.github.io/buy-smart/compare.html</loc><changefreq>daily</changefreq><priority>0.9</priority></url>
-  <url><loc>https://nifengzzzz.github.io/buy-smart/articles/2026-flagship-phone-comparison.html</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://nifengzzzz.github.io/buy-smart/articles/student-laptop-guide-2026.html</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://nifengzzzz.github.io/buy-smart/articles/mid-range-phone-guide-2026.html</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://nifengzzzz.github.io/buy-smart/articles/anc-earbuds-ranking-2026.html</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://nifengzzzz.github.io/buy-smart/articles/best-running-watch-2026.html</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://nifengzzzz.github.io/buy-smart/articles/tablet-buying-guide-2026.html</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://nifengzzzz.github.io/buy-smart/camera.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nifengzzzz.github.io/buy-smart/keyboard.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://nifengzzzz.github.io/buy-smart/articles/2026-flagship-phone-comparison.html</loc><priority>0.9</priority></url>
+  <url><loc>https://nifengzzzz.github.io/buy-smart/articles/student-laptop-guide-2026.html</loc><priority>0.9</priority></url>
+  <url><loc>https://nifengzzzz.github.io/buy-smart/articles/mid-range-phone-guide-2026.html</loc><priority>0.9</priority></url>
+  <url><loc>https://nifengzzzz.github.io/buy-smart/articles/anc-earbuds-ranking-2026.html</loc><priority>0.9</priority></url>
+  <url><loc>https://nifengzzzz.github.io/buy-smart/articles/best-running-watch-2026.html</loc><priority>0.9</priority></url>
+  <url><loc>https://nifengzzzz.github.io/buy-smart/articles/tablet-buying-guide-2026.html</loc><priority>0.9</priority></url>
+  <url><loc>https://nifengzzzz.github.io/buy-smart/articles/huawei-mate80-review-2026.html</loc><priority>0.9</priority></url>
+  <url><loc>https://nifengzzzz.github.io/buy-smart/articles/appliance-ac-guide-2026.html</loc><priority>0.9</priority></url>
+  <url><loc>https://nifengzzzz.github.io/buy-smart/articles/robot-vacuum-ranking-2026.html</loc><priority>0.9</priority></url>
+  <url><loc>https://nifengzzzz.github.io/buy-smart/articles/washer-dryer-guide-2026.html</loc><priority>0.9</priority></url>
+  <url><loc>https://nifengzzzz.github.io/buy-smart/articles/fridge-buying-guide-2026.html</loc><priority>0.9</priority></url>
+  <url><loc>https://nifengzzzz.github.io/buy-smart/articles/console-comparison-2026.html</loc><priority>0.9</priority></url>
+  <url><loc>https://nifengzzzz.github.io/buy-smart/articles/gpu-buying-guide-2026.html</loc><priority>0.9</priority></url>
+  <url><loc>https://nifengzzzz.github.io/buy-smart/articles/monitor-buying-guide-2026.html</loc><priority>0.9</priority></url>
+  <url><loc>https://nifengzzzz.github.io/buy-smart/articles/smart-home-eco-2026.html</loc><priority>0.9</priority></url>
+  <url><loc>https://nifengzzzz.github.io/buy-smart/articles/camera-beginner-guide-2026.html</loc><priority>0.9</priority></url>
+  <url><loc>https://nifengzzzz.github.io/buy-smart/articles/macbook-buying-guide-2026.html</loc><priority>0.9</priority></url>
+  <url><loc>https://nifengzzzz.github.io/buy-smart/articles/mechanical-keyboard-guide-2026.html</loc><priority>0.9</priority></url>
+  <url><loc>https://nifengzzzz.github.io/buy-smart/articles/router-buying-guide-2026.html</loc><priority>0.8</priority></url>
 </urlset>
