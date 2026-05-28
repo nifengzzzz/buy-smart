@@ -176,7 +176,9 @@ footer a{color:var(--t2);text-decoration:none}
 <script>
 // JD Affiliate
 const JD_PID = '2038203081_4105199281_3105626410';
+const TB_PID = '3418000173';
 function jdSearch(kw){ return 'https://search.jd.com/Search?keyword='+encodeURIComponent(kw)+'&enc=utf-8'; }
+function tbSearch(kw){ return 'https://s.taobao.com/search?q='+encodeURIComponent(kw); }
 // ============ DATA ============
 const allProducts = [
   // 手机
@@ -333,7 +335,7 @@ function renderProducts(){
       <div class="prod-name">${p.name}</div>
       <div class="price-row">
         <div class="price-item${p.pdd===min?' best':''}"><span class="plabel">拼多多</span><span class="pval">¥${p.pdd.toLocaleString()}</span></div>
-        <div class="price-item${p.tb===min?' best':''}"><span class="plabel">淘宝</span><span class="pval">¥${p.tb.toLocaleString()}</span></div>
+        <div class="price-item${p.tb===min?' best':''}" onclick="event.stopPropagation();window.open(tbSearch('${encodeURIComponent(p.name)}'),'_blank')" style="cursor:pointer" title="在淘宝搜索此商品"><span class="plabel">淘宝</span><span class="pval">¥${p.tb.toLocaleString()}</span></div>
         <div class="price-item${p.jd===min?' best':''}" onclick="event.stopPropagation();window.open(jdSearch('${encodeURIComponent(p.name)}'),'_blank')" style="cursor:pointer" title="在京东搜索此商品"><span class="plabel">京东</span><span class="pval">¥${p.jd.toLocaleString()}</span></div>
       </div>
     </div>`;
