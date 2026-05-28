@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实时比价 - 智选购</title>
+    <meta name="description" content="京东、淘宝、拼多多、1688 四大平台实时比价。每天更新，帮你找到最低价。">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; line-height: 1.6; color: #333; background: #f8f9fa; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+        header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px 0; margin-bottom: 30px; text-align: center; }
+        header h1 { font-size: 1.8em; }
+        nav { margin-bottom: 20px; }
+        nav a { color: #667eea; text-decoration: none; margin-right: 15px; }
+        .price-table { width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 30px; }
+        .price-table th { background: #667eea; color: white; padding: 12px 15px; text-align: left; }
+        .price-table td { padding: 12px 15px; border-bottom: 1px solid #eee; }
+        .price-table .lowest { background: #e8f5e9; font-weight: 700; color: #2e7d32; }
+        .platform-tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.8em; margin-right: 4px; }
+        .tag-jd { background: #ffe0e0; color: #c0392b; }
+        .tag-tb { background: #fff0e0; color: #e67e22; }
+        .tag-pdd { background: #ffe0f0; color: #e91e63; }
+        .tag-1688 { background: #e0f0ff; color: #2980b9; }
+        footer { text-align: center; padding: 30px; color: #999; }
+        footer a { color: #667eea; }
+    </style>
+</head>
+<body>
+<header>
+    <div class="container">
+        <h1>📊 实时比价</h1>
+        <p style="opacity:0.8;margin-top:5px;">数据更新于 2026-05-27 · 京东 / 淘宝 / 拼多多 / 1688</p>
+    </div>
+</header>
+
+<div class="container">
+    <nav><a href="index.html">← 返回首页</a></nav>
+
+    <h2 style="margin-bottom:15px;">📱 热门手机比价</h2>
+    <table class="price-table">
+        <thead><tr><th>商品</th><th>拼多多</th><th>淘宝</th><th>京东</th><th>1688</th><th>最低价</th></tr></thead>
+        <tbody>
+            <tr><td>iPhone 17 128G</td><td>¥5,299</td><td>¥5,499</td><td>¥5,599</td><td>-</td><td class="lowest">拼多多 ¥5,299</td></tr>
+            <tr><td>iPhone 17 256G</td><td>¥5,899</td><td>¥5,999</td><td>¥6,099</td><td>-</td><td class="lowest">拼多多 ¥5,899</td></tr>
+            <tr><td>iPhone 17 Pro 256G</td><td>¥7,499</td><td>¥7,299</td><td>¥6,999</td><td>-</td><td class="lowest">京东 ¥6,999</td></tr>
+            <tr><td>华为 Mate 80 256G</td><td>¥4,099</td><td>¥4,199</td><td>¥4,299</td><td>-</td><td class="lowest">拼多多 ¥4,099</td></tr>
+            <tr><td>华为 Mate 80 Pro 512G</td><td>¥6,199</td><td>¥5,999</td><td>¥6,299</td><td>-</td><td class="lowest">淘宝 ¥5,999</td></tr>
+            <tr><td>小米 17 256G</td><td>¥3,599</td><td>¥3,699</td><td>¥3,849</td><td>-</td><td class="lowest">拼多多 ¥3,599</td></tr>
+            <tr><td>小米 15 Ultra 256G</td><td>¥4,299</td><td>¥4,599</td><td>¥4,399</td><td>-</td><td class="lowest">拼多多 ¥4,299</td></tr>
+            <tr><td>OPPO Find X9 256G</td><td>¥4,099</td><td>¥4,299</td><td>¥4,399</td><td>-</td><td class="lowest">拼多多 ¥4,099</td></tr>
+            <tr><td>vivo X300 256G</td><td>¥4,099</td><td>¥4,299</td><td>¥4,299</td><td>-</td><td class="lowest">拼多多 ¥4,099</td></tr>
+        </tbody>
+    </table>
+
+    <h2 style="margin-bottom:15px;">💻 笔记本比价</h2>
+    <table class="price-table">
+        <thead><tr><th>商品</th><th>拼多多</th><th>淘宝</th><th>京东</th><th>1688</th><th>最低价</th></tr></thead>
+        <tbody>
+            <tr><td>MacBook Air M4 256G</td><td>¥7,199</td><td>¥7,499</td><td>¥7,599</td><td>-</td><td class="lowest">拼多多 ¥7,199</td></tr>
+            <tr><td>MacBook Pro M4 Pro 512G</td><td>¥13,499</td><td>¥12,999</td><td>¥13,999</td><td>-</td><td class="lowest">淘宝 ¥12,999</td></tr>
+            <tr><td>华为 MateBook X Pro 2026</td><td>¥8,499</td><td>¥8,299</td><td>¥8,999</td><td>-</td><td class="lowest">淘宝 ¥8,299</td></tr>
+            <tr><td>联想 ThinkPad X1 Carbon</td><td>¥9,299</td><td>¥8,999</td><td>¥9,499</td><td>-</td><td class="lowest">淘宝 ¥8,999</td></tr>
+        </tbody>
+    </table>
+
+    <h2 style="margin-bottom:15px;">🎧 热门耳机比价</h2>
+    <table class="price-table">
+        <thead><tr><th>商品</th><th>拼多多</th><th>淘宝</th><th>京东</th><th>1688</th><th>最低价</th></tr></thead>
+        <tbody>
+            <tr><td>AirPods Pro 3</td><td>¥1,499</td><td>¥1,599</td><td>¥1,649</td><td>-</td><td class="lowest">拼多多 ¥1,499</td></tr>
+            <tr><td>华为 FreeBuds 7 Pro</td><td>¥1,199</td><td>¥1,299</td><td>¥1,349</td><td>-</td><td class="lowest">拼多多 ¥1,199</td></tr>
+            <tr><td>小米 Buds 6 Pro</td><td>¥599</td><td>¥649</td><td>¥699</td><td>-</td><td class="lowest">拼多多 ¥599</td></tr>
+            <tr><td>索尼 WF-1000XM7</td><td>¥1,699</td><td>¥1,799</td><td>¥1,899</td><td>-</td><td class="lowest">拼多多 ¥1,699</td></tr>
+        </tbody>
+    </table>
+
+    <p style="color:#999;font-size:0.85em;text-align:center;margin:20px 0;">※ 价格为AI自动采集，可能存在延迟。实际价格以购买时平台显示为准。</p>
+</div>
+<footer><div class="container"><p>© 2026 <a href="index.html">智选购 BuySmart</a></p></div></footer>
+</body>
+</html>
