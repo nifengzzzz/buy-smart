@@ -201,7 +201,8 @@ footer a:hover{color:var(--text)}
       <a href="smarthome.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>智能家居</a>
       <a href="camera.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>相机</a>
       <a href="keyboard.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><line x1="6" y1="10" x2="6" y2="14"/><line x1="10" y1="10" x2="10" y2="14"/><line x1="14" y1="10" x2="14" y2="14"/><line x1="18" y1="10" x2="18" y2="14"/></svg>外设</a>
-      <a href="compare.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>比价</a>
+      <a href="compare.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg><span data-i18n="nav.compare">比价</span></a>
+      <button class="lang-toggle" onclick="toggleLang()" title="Switch to English" style="background:var(--bg-card);border:1px solid var(--border);color:var(--text-secondary);padding:4px 10px;border-radius:6px;cursor:pointer;font-family:'Inter',sans-serif;font-size:0.75rem;font-weight:600;margin-left:6px;transition:var(--transition)">EN</button>
     </div>
   </div>
 </nav>
@@ -209,8 +210,8 @@ footer a:hover{color:var(--text)}
 <header class="hero">
   <div class="container">
     <div class="pill"><span class="live-dot"></span>AI 持续监控 · 实时更新</div>
-    <h1>买对<span class="gradient-text">不买贵</span></h1>
-    <p>AI 驱动的智能选购引擎。覆盖 15+ 品类，六平台实时比价，深度评测帮你决策。</p>
+    <h1><span data-i18n="hero.title1">买对</span><span class="gradient-text" data-i18n="hero.title2">不买贵</span></h1>
+    <p data-i18n="hero.desc">AI 驱动的智能选购引擎。覆盖 15+ 品类，六平台实时比价，深度评测帮你决策。</p>
     <div class="hero-stats">
       <div class="hero-stat"><span class="num">6</span><div class="label">比价平台</div></div>
       <div class="hero-stat"><span class="num">300+</span><div class="label">深度评测</div></div>
@@ -276,8 +277,8 @@ footer a:hover{color:var(--text)}
 <section>
   <div class="section-header">
     <div class="section-label">/// real-time pricing</div>
-    <h2><svg class="sec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>实时比价</h2>
-    <p class="section-desc">AI 每日扫描六大平台，锁定最低价。数据更新于 2026-05-28</p>
+    <h2><svg class="sec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg><span data-i18n="section.pricing">实时比价</span></h2>
+    <p class="section-desc" data-i18n="section.pricing.desc">AI 每日扫描六大平台，锁定最低价。数据更新于 2026-05-28</p>
   </div>
   <div class="price-table-wrap">
     <table class="price-table">
@@ -432,6 +433,7 @@ footer a:hover{color:var(--text)}
   </div>
 </footer>
 
+<script src="i18n.js"></script>
 <script>
 const canvas=document.getElementById('bg-canvas'),ctx=canvas.getContext('2d');
 let particles=[],w,h;
