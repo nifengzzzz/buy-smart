@@ -2,84 +2,462 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>实时比价 - 智选购</title>
-<meta name="description" content="京东、淘宝、拼多多、1688四大平台实时比价。手机、笔记本、耳机每天更新最低价。">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<title>实时比价 — BuySmart</title>
+<meta name="description" content="AI驱动的多平台实时比价工具。覆盖10+品类，自助对比京东/淘宝/拼多多价格。每12小时自动更新。">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0a0a0f;--bg-card:rgba(255,255,255,0.03);--border:rgba(255,255,255,0.06);--text:#e8e8ed;--text-secondary:#8888a0;--text-dim:#5a5a72;--accent:#6c5ce7;--accent2:#00cec9;--green:#00b894;--red:#ff6b6b;--radius:16px;--transition:0.25s cubic-bezier(0.4,0,0.2,1)}
+:root{--bg:#050508;--bg-card:rgba(255,255,255,0.025);--bg-hover:rgba(255,255,255,0.05);--border:rgba(255,255,255,0.06);--border-hover:rgba(255,255,255,0.12);--text:#eaeaf0;--text2:#8888a0;--text3:#4a4a60;--accent:#7c5ce7;--cyan:#00cec9;--pink:#ff6b9d;--green:#00b894;--red:#ff6b6b;--radius:16px;--tr:0.25s cubic-bezier(0.4,0,0.2,1)}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;background-image:radial-gradient(ellipse 80% 50% at 50% -20%,rgba(108,92,231,0.06),transparent)}
-.container{max-width:1100px;margin:0 auto;padding:0 24px}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,15,0.8);backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid var(--border)}
-nav .container{display:flex;align-items:center;justify-content:space-between;height:60px}
-.logo{font-weight:800;font-size:1.25rem;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none}
-.nav-links{display:flex;gap:8px}
-.nav-links a{color:var(--text-secondary);text-decoration:none;font-size:0.875rem;font-weight:500;padding:6px 14px;border-radius:8px;transition:var(--transition)}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+.container{max-width:1400px;margin:0 auto;padding:0 28px}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(5,5,8,0.8);backdrop-filter:blur(24px) saturate(180%);border-bottom:1px solid var(--border)}
+nav .container{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo-wrap{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-mark{width:32px;height:32px}
+.logo-text{font-weight:800;font-size:1.15rem;color:var(--text);letter-spacing:-0.02em}
+.nav-links{display:flex;gap:2px;flex-wrap:wrap}
+.nav-links a{display:flex;align-items:center;gap:5px;color:var(--text2);text-decoration:none;font-size:0.78rem;font-weight:500;padding:6px 12px;border-radius:8px;transition:var(--tr);white-space:nowrap}
 .nav-links a:hover{color:var(--text);background:var(--bg-card)}
-.nav-links a.active{color:var(--accent2);background:rgba(0,206,201,0.08)}
-header{padding:120px 0 40px;text-align:center}
-header h1{font-size:clamp(2rem,5vw,3rem);font-weight:800;letter-spacing:-0.03em;margin-bottom:12px}
-header p{color:var(--text-secondary)}
-h2{font-size:1.3rem;font-weight:700;margin:30px 0 16px;padding-left:12px;border-left:3px solid var(--accent)}
-.price-wrap{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:30px;backdrop-filter:blur(10px)}
-table{width:100%;border-collapse:collapse}
-th{text-align:left;padding:14px 20px;font-size:0.75rem;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.06em;border-bottom:1px solid var(--border);font-family:'JetBrains Mono',monospace;background:rgba(255,255,255,0.015)}
-td{padding:14px 20px;font-size:0.9rem;border-bottom:1px solid var(--border);color:var(--text-secondary);transition:var(--transition)}
-tr:last-child td{border-bottom:none}
-tr:hover td{background:rgba(255,255,255,0.03)}
-.price{font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--red)}
-.lowest{font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--green)}
-.platform-tag{display:inline-block;padding:3px 10px;border-radius:6px;font-size:0.75rem;font-weight:600}
-.tag-pdd{background:rgba(255,107,107,0.12);color:#ff6b6b}
-.tag-jd{background:rgba(0,184,148,0.12);color:#00b894}
-.tag-tb{background:rgba(253,203,110,0.12);color:#fdcb6e}
-.disclaimer{color:var(--text-dim);font-size:0.8rem;text-align:center;margin:30px 0}
-footer{border-top:1px solid var(--border);padding:32px 0;text-align:center;color:var(--text-dim);font-size:0.8rem}
-footer a{color:var(--text-secondary);text-decoration:none}
-@media(max-width:600px){.price-wrap{overflow-x:auto}table{min-width:500px}}
+.nav-links a.active{color:var(--cyan);background:rgba(0,206,201,0.06)}
+.nav-icon{width:14px;height:14px;opacity:0.7}
+/* Layout */
+.compare-layout{display:flex;gap:24px;padding-top:104px;padding-bottom:60px;min-height:100vh}
+.sidebar{width:220px;flex-shrink:0;position:sticky;top:84px;align-self:flex-start;max-height:calc(100vh - 100px);overflow-y:auto}
+.main{flex:1;min-width:0}
+/* Sidebar */
+.sidebar-title{font-family:'JetBrains Mono',monospace;font-size:0.68rem;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px;padding:0 4px}
+.cat-list{display:flex;flex-direction:column;gap:4px}
+.cat-item{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;cursor:pointer;transition:var(--tr);border:1px solid transparent;background:transparent;color:var(--text2);font-family:'Inter',sans-serif;font-size:0.85rem;font-weight:500;width:100%;text-align:left}
+.cat-item:hover{background:var(--bg-card);color:var(--text)}
+.cat-item.active{background:var(--bg-hover);border-color:var(--accent);color:var(--text);box-shadow:0 0 0 1px rgba(124,92,231,0.2)}
+.cat-item .cat-dot{width:6px;height:6px;border-radius:50%;background:currentColor;opacity:0.4;flex-shrink:0}
+.cat-item.active .cat-dot{opacity:1;background:var(--cyan);box-shadow:0 0 8px var(--cyan)}
+.cat-count{font-family:'JetBrains Mono',monospace;font-size:0.7rem;margin-left:auto;opacity:0.5}
+/* Update bar */
+.update-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px}
+.update-info{display:flex;align-items:center;gap:10px;font-size:0.82rem;color:var(--text2)}
+.update-dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:glowPulse 2s infinite;box-shadow:0 0 8px var(--green)}
+@keyframes glowPulse{0%,100%{opacity:1}50%{opacity:0.3}}
+.update-time{font-family:'JetBrains Mono',monospace;font-size:0.78rem}
+.next-update{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--text3);background:var(--bg-card);border:1px solid var(--border);padding:4px 12px;border-radius:20px}
+.search-box{display:flex;align-items:center;gap:8px;background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:8px 16px;width:260px;transition:var(--tr)}
+.search-box:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px rgba(124,92,231,0.15)}
+.search-box input{background:none;border:none;color:var(--text);font-family:'Inter',sans-serif;font-size:0.82rem;outline:none;width:100%}
+.search-box input::placeholder{color:var(--text3)}
+.search-icon{width:16px;height:16px;color:var(--text3);flex-shrink:0}
+/* Price table */
+.table-wrap{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;backdrop-filter:blur(10px);margin-bottom:24px}
+.table-wrap::before{content:'';display:block;height:1px;background:linear-gradient(90deg,transparent,var(--accent),var(--cyan),transparent);opacity:0.5}
+.price-table{width:100%;border-collapse:collapse}
+.price-table th{text-align:left;padding:14px 20px;font-size:0.68rem;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;border-bottom:1px solid var(--border);font-family:'JetBrains Mono',monospace;background:rgba(255,255,255,0.01);cursor:pointer;user-select:none;transition:var(--tr)}
+.price-table th:hover{color:var(--text)}
+.price-table th .sort-arrow{font-size:0.6rem;margin-left:4px;opacity:0.4}
+.price-table th.sorted .sort-arrow{opacity:1;color:var(--cyan)}
+.price-table td{padding:14px 20px;font-size:0.88rem;border-bottom:1px solid rgba(255,255,255,0.03);transition:var(--tr)}
+.price-table tr:last-child td{border-bottom:none}
+.price-table tbody tr{transition:var(--tr);cursor:pointer}
+.price-table tbody tr:hover{background:rgba(124,92,231,0.05)}
+.price-table tbody tr.selected{background:rgba(0,206,201,0.06);border-left:3px solid var(--cyan)}
+.price-cell{font-family:'JetBrains Mono',monospace;font-weight:500}
+.price-low{color:var(--green);font-weight:700}
+.price-high{color:var(--text2)}
+.platform-badge{display:inline-block;padding:3px 10px;border-radius:6px;font-size:0.7rem;font-weight:700}
+.badge-pdd{background:rgba(255,107,107,0.15);color:#ff6b6b}.badge-jd{background:rgba(0,184,148,0.15);color:#00b894}.badge-tb{background:rgba(253,203,110,0.15);color:#fdcb6e}.badge-1688{background:rgba(116,185,255,0.12);color:#74b9ff}
+.price-delta{font-size:0.7rem;margin-left:4px;display:inline-flex;align-items:center;gap:2px}
+.down{color:var(--green)}.up{color:var(--red)}
+/* Compare panel */
+.compare-panel{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;backdrop-filter:blur(10px)}
+.compare-panel h3{font-size:1rem;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.compare-panel .subtitle{font-size:0.8rem;color:var(--text2);margin-bottom:20px}
+.compare-slots{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:20px}
+.compare-slot{background:var(--bg-card);border:1px dashed var(--border);border-radius:var(--radius-sm);padding:20px;text-align:center;min-height:120px;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:var(--tr);position:relative}
+.compare-slot.filled{border-style:solid;border-color:var(--border-hover);background:var(--bg-hover)}
+.compare-slot .slot-hint{font-size:0.78rem;color:var(--text3)}
+.compare-slot .slot-product{font-weight:700;font-size:0.95rem;margin-bottom:4px}
+.compare-slot .slot-prices{display:flex;gap:12px;justify-content:center;margin-top:8px;flex-wrap:wrap}
+.compare-slot .slot-price{font-family:'JetBrains Mono',monospace;font-size:0.85rem;padding:4px 10px;border-radius:6px;background:var(--bg-card);border:1px solid var(--border)}
+.compare-slot .remove-btn{position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:50%;border:1px solid var(--border);background:var(--bg-card);color:var(--text2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:0.7rem;transition:var(--tr);opacity:0}
+.compare-slot:hover .remove-btn{opacity:1}
+.remove-btn:hover{background:rgba(255,107,107,0.15);color:var(--red);border-color:var(--red)}
+.compare-result{background:linear-gradient(135deg,rgba(124,92,231,0.08),rgba(0,206,201,0.04));border:1px solid var(--accent);border-radius:var(--radius-sm);padding:20px;display:none}
+.compare-result.show{display:block}
+.compare-result h4{font-size:0.9rem;font-weight:700;color:var(--cyan);margin-bottom:12px}
+.compare-result .result-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.result-card{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:14px}
+.result-card .platform{font-size:0.72rem;color:var(--text3);margin-bottom:4px;text-transform:uppercase}
+.result-card .saving{font-family:'JetBrains Mono',monospace;font-size:1.1rem;font-weight:700;color:var(--green)}
+.result-card .detail{font-size:0.78rem;color:var(--text2);margin-top:2px}
+.clear-compare{display:inline-flex;align-items:center;gap:6px;background:none;border:1px solid var(--border);color:var(--text2);font-family:'Inter',sans-serif;font-size:0.78rem;padding:6px 14px;border-radius:8px;cursor:pointer;transition:var(--tr);margin-top:12px}
+.clear-compare:hover{color:var(--red);border-color:var(--red)}
+footer{border-top:1px solid var(--border);padding:32px 0;text-align:center;color:var(--text3);font-size:0.78rem}
+footer a{color:var(--text2);text-decoration:none}
+@media(max-width:900px){.compare-layout{flex-direction:column}.sidebar{width:100%;position:static;max-height:none}.cat-list{flex-direction:row;flex-wrap:wrap}.cat-item{padding:8px 12px;font-size:0.78rem}.search-box{width:100%}}
 </style>
 </head>
 <body>
-<nav><div class="container"><a href="index.html" class="logo">BuySmart</a><div class="nav-links"><a href="index.html">首页</a><a href="phone.html">手机</a><a href="laptop.html">笔记本</a><a href="earphone.html">耳机</a><a href="watch.html">穿戴</a><a href="compare.html" class="active">比价</a></div></div></nav>
-<header><div class="container"><h1>📊 实时比价</h1><p>AI 每日扫描四大平台 · 数据更新于 2026-05-27</p></div></header>
-<main class="container">
 
-<h2>📱 热门手机</h2>
-<div class="price-wrap"><table>
-<thead><tr><th>商品</th><th>拼多多</th><th>淘宝</th><th>京东</th><th>最低价</th></tr></thead>
-<tbody>
-<tr><td>iPhone 17 128G</td><td class="price">¥5,299</td><td>¥5,499</td><td>¥5,599</td><td class="lowest"><span class="platform-tag tag-pdd">拼多多</span> ¥5,299</td></tr>
-<tr><td>iPhone 17 Pro 256G</td><td>¥7,499</td><td>¥7,299</td><td class="price">¥6,999</td><td class="lowest"><span class="platform-tag tag-jd">京东</span> ¥6,999</td></tr>
-<tr><td>华为 Mate 80 256G</td><td class="price">¥4,099</td><td>¥4,199</td><td>¥4,299</td><td class="lowest"><span class="platform-tag tag-pdd">拼多多</span> ¥4,099</td></tr>
-<tr><td>小米 17 256G</td><td class="price">¥3,599</td><td>¥3,699</td><td>¥3,849</td><td class="lowest"><span class="platform-tag tag-pdd">拼多多</span> ¥3,599</td></tr>
-<tr><td>OPPO Find X9 256G</td><td class="price">¥4,099</td><td>¥4,299</td><td>¥4,399</td><td class="lowest"><span class="platform-tag tag-pdd">拼多多</span> ¥4,099</td></tr>
-</tbody>
-</table></div>
+<nav>
+  <div class="container">
+    <a href="index.html" class="logo-wrap">
+      <div class="logo-mark"><svg viewBox="0 0 34 34" fill="none"><rect x="2" y="2" width="30" height="30" rx="8" stroke="url(#lg)" stroke-width="2.2"/><path d="M10 22V12l6 8V12" stroke="url(#lg)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 12v10h6" stroke="url(#lg)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="lg" x1="2" y1="2" x2="34" y2="34"><stop stop-color="#00cec9"/><stop offset="1" stop-color="#7c5ce7"/></linearGradient></defs></svg></div>
+      <span class="logo-text">BuySmart</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>首页</a>
+      <a href="compare.html" class="active"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>比价</a>
+    </div>
+  </div>
+</nav>
 
-<h2>💻 热门笔记本</h2>
-<div class="price-wrap"><table>
-<thead><tr><th>商品</th><th>拼多多</th><th>淘宝</th><th>京东</th><th>最低价</th></tr></thead>
-<tbody>
-<tr><td>MacBook Air M4 256G</td><td class="price">¥7,199</td><td>¥7,499</td><td>¥7,599</td><td class="lowest"><span class="platform-tag tag-pdd">拼多多</span> ¥7,199</td></tr>
-<tr><td>MacBook Pro M4 Pro 512G</td><td>¥13,499</td><td class="price">¥12,999</td><td>¥13,999</td><td class="lowest"><span class="platform-tag tag-tb">淘宝</span> ¥12,999</td></tr>
-<tr><td>联想 拯救者 Y9000X</td><td class="price">¥7,299</td><td>¥7,499</td><td>¥7,699</td><td class="lowest"><span class="platform-tag tag-pdd">拼多多</span> ¥7,299</td></tr>
-<tr><td>ThinkBook 14+ 2026</td><td>¥5,799</td><td>¥5,999</td><td class="price">¥5,699</td><td class="lowest"><span class="platform-tag tag-jd">京东</span> ¥5,699</td></tr>
-</tbody>
-</table></div>
+<div class="container">
+<div class="compare-layout">
 
-<h2>🎧 热门耳机</h2>
-<div class="price-wrap"><table>
-<thead><tr><th>商品</th><th>拼多多</th><th>淘宝</th><th>京东</th><th>最低价</th></tr></thead>
-<tbody>
-<tr><td>AirPods Pro 3</td><td class="price">¥1,499</td><td>¥1,599</td><td>¥1,649</td><td class="lowest"><span class="platform-tag tag-pdd">拼多多</span> ¥1,499</td></tr>
-<tr><td>索尼 WF-1000XM7</td><td class="price">¥1,699</td><td>¥1,799</td><td>¥1,899</td><td class="lowest"><span class="platform-tag tag-pdd">拼多多</span> ¥1,699</td></tr>
-<tr><td>华为 FreeBuds 7 Pro</td><td class="price">¥1,199</td><td>¥1,299</td><td>¥1,349</td><td class="lowest"><span class="platform-tag tag-pdd">拼多多</span> ¥1,199</td></tr>
-<tr><td>小米 Buds 6 Pro</td><td class="price">¥599</td><td>¥649</td><td>¥699</td><td class="lowest"><span class="platform-tag tag-pdd">拼多多</span> ¥599</td></tr>
-</tbody>
-</table></div>
+<!-- Sidebar -->
+<aside class="sidebar">
+  <div class="sidebar-title">品类筛选</div>
+  <div class="cat-list" id="catList">
+  </div>
+</aside>
 
-<p class="disclaimer">※ 价格为 AI 自动采集，可能存在延迟。实际价格以购买时平台显示为准。</p>
+<!-- Main -->
+<main class="main">
+
+  <div class="update-bar">
+    <div class="update-info">
+      <span class="update-dot"></span>
+      <span>数据更新于</span>
+      <span class="update-time" id="updateTime">2026-05-28 08:00</span>
+    </div>
+    <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+      <div class="next-update" id="countdown">下次更新: 11h 42m</div>
+      <div class="search-box">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="searchInput" placeholder="搜索商品名称...">
+      </div>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="table-wrap">
+    <table class="price-table">
+      <thead>
+        <tr>
+          <th data-sort="name">商品 <span class="sort-arrow">⇅</span></th>
+          <th data-sort="pdd">拼多多 <span class="sort-arrow">⇅</span></th>
+          <th data-sort="tb">淘宝 <span class="sort-arrow">⇅</span></th>
+          <th data-sort="jd">京东 <span class="sort-arrow">⇅</span></th>
+          <th data-sort="lowest">最低价 <span class="sort-arrow">⇅</span></th>
+        </tr>
+      </thead>
+      <tbody id="priceBody"></tbody>
+    </table>
+  </div>
+
+  <!-- Compare Panel -->
+  <div class="compare-panel" id="comparePanel">
+    <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>商品对比</h3>
+    <p class="subtitle">点击表格中的商品添加到对比栏，最多3个，自动计算各平台最优选择</p>
+    <div class="compare-slots" id="compareSlots">
+      <div class="compare-slot"><span class="slot-hint">点击商品添加对比</span></div>
+      <div class="compare-slot"><span class="slot-hint">点击商品添加对比</span></div>
+      <div class="compare-slot"><span class="slot-hint">点击商品添加对比</span></div>
+    </div>
+    <div class="compare-result" id="compareResult"></div>
+    <button class="clear-compare" id="clearCompare" onclick="clearCompare()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>清除对比
+    </button>
+  </div>
+
 </main>
-<footer><div class="container"><p>© 2026 <a href="index.html">BuySmart</a> · AI 驱动的数码选购引擎</p></div></footer>
+</div>
+</div>
+
+<footer><div class="container"><p>© 2026 <a href="index.html">BuySmart</a> · 数据每12小时自动更新</p></div></footer>
+
+<script>
+// ============ DATA ============
+const priceData = {
+  phone: {
+    name:'手机',icon:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>',
+    items:[
+      {name:'iPhone 17 128G',pdd:5299,tb:5499,jd:5599,delta:[-80,0,0]},
+      {name:'iPhone 17 256G',pdd:5899,tb:5999,jd:6099,delta:[0,0,0]},
+      {name:'iPhone 17 Pro 256G',pdd:7499,tb:7299,jd:6999,delta:[0,-100,-200]},
+      {name:'华为 Mate 80 256G',pdd:4099,tb:4199,jd:4299,delta:[-100,0,0]},
+      {name:'华为 Mate 80 Pro 512G',pdd:6199,tb:5999,jd:6299,delta:[0,-150,0]},
+      {name:'小米 17 256G',pdd:3599,tb:3699,jd:3849,delta:[-100,0,0]},
+      {name:'小米 15 Ultra 256G',pdd:4299,tb:4599,jd:4399,delta:[-150,0,0]},
+      {name:'OPPO Find X9 256G',pdd:4099,tb:4299,jd:4399,delta:[-100,0,0]},
+      {name:'vivo X300 256G',pdd:4099,tb:4299,jd:4299,delta:[0,0,0]},
+    ]
+  },
+  laptop: {
+    name:'笔记本',icon:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="2" y1="20" x2="22" y2="20"/></svg>',
+    items:[
+      {name:'MacBook Air M4 256G',pdd:7199,tb:7499,jd:7599,delta:[0,-300,0]},
+      {name:'MacBook Air M4 512G',pdd:8499,tb:8799,jd:8999,delta:[0,0,0]},
+      {name:'MacBook Pro M4 Pro 512G',pdd:13499,tb:12999,jd:13999,delta:[0,-500,0]},
+      {name:'华为 MateBook X Pro 2026',pdd:8499,tb:8299,jd:8999,delta:[0,-200,0]},
+      {name:'联想 ThinkPad X1 Carbon',pdd:9299,tb:8999,jd:9499,delta:[0,-200,0]},
+      {name:'联想 拯救者 Y9000X',pdd:7299,tb:7499,jd:7699,delta:[-100,0,0]},
+      {name:'ThinkBook 14+ 2026',pdd:5799,tb:5999,jd:5699,delta:[0,0,-100]},
+      {name:'华硕 无畏 Pro 15',pdd:6199,tb:6299,jd:6499,delta:[-50,0,0]},
+    ]
+  },
+  earphone: {
+    name:'耳机',icon:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>',
+    items:[
+      {name:'AirPods Pro 3',pdd:1499,tb:1599,jd:1649,delta:[0,0,0]},
+      {name:'AirPods 4',pdd:949,tb:999,jd:1049,delta:[-30,0,0]},
+      {name:'索尼 WF-1000XM7',pdd:1699,tb:1799,jd:1899,delta:[-50,0,0]},
+      {name:'华为 FreeBuds 7 Pro',pdd:1199,tb:1299,jd:1349,delta:[-50,0,0]},
+      {name:'小米 Buds 6 Pro',pdd:599,tb:649,jd:699,delta:[0,0,0]},
+      {name:'OPPO Enco X4',pdd:899,tb:949,jd:999,delta:[0,0,0]},
+    ]
+  },
+  appliance: {
+    name:'家电',icon:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="2"/><circle cx="12" cy="12" r="4"/></svg>',
+    items:[
+      {name:'戴森 V16 Detect',pdd:3699,tb:3499,jd:3799,delta:[0,-200,0]},
+      {name:'戴森 V15 Detect',pdd:2899,tb:2999,jd:3199,delta:[-100,0,0]},
+      {name:'石头 P20 Pro 扫地机',pdd:3499,tb:3599,jd:3799,delta:[0,-100,0]},
+      {name:'科沃斯 X5 Pro',pdd:3999,tb:4199,jd:4299,delta:[-200,0,0]},
+      {name:'小米空调 1.5匹 新风',pdd:2299,tb:2399,jd:2499,delta:[0,0,0]},
+      {name:'格力 云佳 1.5匹',pdd:2499,tb:2599,jd:2699,delta:[-50,0,0]},
+      {name:'海尔 冰箱 十字对开 500L',pdd:3499,tb:3599,jd:3799,delta:[0,0,0]},
+      {name:'小天鹅 洗烘套装',pdd:4999,tb:5299,jd:5499,delta:[-200,0,0]},
+    ]
+  },
+  monitor: {
+    name:'显示器',icon:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/></svg>',
+    items:[
+      {name:'LG 27GP950 4K 160Hz',pdd:3299,tb:3499,jd:3599,delta:[0,0,0]},
+      {name:'戴尔 U2724D 2K',pdd:2499,tb:2599,jd:2699,delta:[0,0,0]},
+      {name:'华硕 PG27AQDM OLED',pdd:5499,tb:5799,jd:5999,delta:[-200,0,0]},
+      {name:'红米 27寸 4K',pdd:1399,tb:1499,jd:1599,delta:[-50,0,0]},
+      {name:'Apple Studio Display',pdd:10999,tb:10999,jd:11499,delta:[0,500,0]},
+    ]
+  },
+  gaming: {
+    name:'游戏装备',icon:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="6" width="20" height="12" rx="2"/><line x1="6" y1="11" x2="10" y2="11"/><line x1="8" y1="9" x2="8" y2="13"/></svg>',
+    items:[
+      {name:'PS5 Pro 数字版',pdd:4799,tb:4999,jd:5199,delta:[0,0,0]},
+      {name:'Switch 2',pdd:2199,tb:2299,jd:2399,delta:[0,0,0]},
+      {name:'Xbox Series X 2TB',pdd:3499,tb:3699,jd:3899,delta:[0,0,0]},
+      {name:'RTX 4070 Super',pdd:3899,tb:3999,jd:4199,delta:[-100,0,0]},
+      {name:'Xbox 无线手柄',pdd:369,tb:399,jd:419,delta:[0,0,0]},
+    ]
+  },
+  smarthome: {
+    name:'智能家居',icon:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 9v2h2v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-9h2V9l-10-7z"/></svg>',
+    items:[
+      {name:'小米 AX9000 WiFi7',pdd:699,tb:749,jd:799,delta:[0,0,0]},
+      {name:'TP-Link BE800',pdd:1499,tb:1599,jd:1699,delta:[-100,0,0]},
+      {name:'小米智能门锁 M30 Pro',pdd:1499,tb:1599,jd:1699,delta:[0,0,0]},
+      {name:'HomePod 2',pdd:2099,tb:2199,jd:2299,delta:[0,0,0]},
+      {name:'小米音箱 Pro',pdd:249,tb:269,jd:299,delta:[0,0,0]},
+    ]
+  },
+  watch: {
+    name:'穿戴',icon:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="7"/><polyline points="12 7 12 12 15 15"/></svg>',
+    items:[
+      {name:'Apple Watch Ultra 3',pdd:5799,tb:5599,jd:5899,delta:[0,-200,0]},
+      {name:'Apple Watch S11',pdd:2699,tb:2799,jd:2899,delta:[0,0,0]},
+      {name:'华为 Watch GT 6',pdd:1488,tb:1588,jd:1688,delta:[-50,0,0]},
+      {name:'小米手环 10',pdd:249,tb:269,jd:279,delta:[0,0,0]},
+      {name:'佳明 Fenix 9',pdd:5980,tb:6280,jd:6480,delta:[0,0,0]},
+    ]
+  },
+  tablet: {
+    name:'平板',icon:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>',
+    items:[
+      {name:'iPad Pro M5 11"',pdd:7599,tb:7999,jd:8299,delta:[0,0,0]},
+      {name:'iPad Air M4 11"',pdd:4599,tb:4799,jd:4999,delta:[-100,0,0]},
+      {name:'华为 MatePad Pro 12.2',pdd:4099,tb:4299,jd:4499,delta:[0,0,0]},
+      {name:'小米平板 8',pdd:2599,tb:2799,jd:2899,delta:[-100,0,0]},
+      {name:'三星 Tab S11',pdd:5499,tb:5799,jd:5999,delta:[0,0,0]},
+    ]
+  }
+};
+
+// ============ STATE ============
+let activeCat = 'phone';
+let compareList = [];
+let sortKey = 'lowest';
+let sortAsc = true;
+let searchQuery = '';
+
+// ============ RENDER ============
+function renderSidebar(){
+  const list = document.getElementById('catList');
+  list.innerHTML = Object.entries(priceData).map(([key,cat])=>`
+    <button class="cat-item${key===activeCat?' active':''}" onclick="switchCat('${key}')">
+      <span class="cat-dot"></span>${cat.icon} ${cat.name}
+      <span class="cat-count">${cat.items.length}</span>
+    </button>
+  `).join('');
+}
+
+function renderTable(){
+  const cat = priceData[activeCat];
+  let items = [...cat.items];
+  if(searchQuery){
+    const q = searchQuery.toLowerCase();
+    items = items.filter(i=>i.name.toLowerCase().includes(q));
+  }
+  items.sort((a,b)=>{
+    let va,vb;
+    if(sortKey==='name'){va=a.name;vb=b.name;return sortAsc?va.localeCompare(vb):vb.localeCompare(va)}
+    if(sortKey==='lowest'){va=Math.min(a.pdd,a.tb,a.jd);vb=Math.min(b.pdd,b.tb,b.jd)}
+    else{va=a[sortKey];vb=b[sortKey]}
+    return sortAsc?va-vb:vb-va;
+  });
+
+  const tbody = document.getElementById('priceBody');
+  tbody.innerHTML = items.map((item,i)=>{
+    const min = Math.min(item.pdd,item.tb,item.jd);
+    const platforms = [
+      {key:'pdd',name:'拼多多',cls:'badge-pdd',val:item.pdd},
+      {key:'tb',name:'淘宝',cls:'badge-tb',val:item.tb},
+      {key:'jd',name:'京东',cls:'badge-jd',val:item.jd},
+    ];
+    const lowest = platforms.filter(p=>p.val===min);
+    const itemKey = `${activeCat}-${i}`;
+    const selected = compareList.includes(itemKey);
+    return `<tr class="${selected?'selected':''}" onclick="toggleCompare('${itemKey}')" data-key="${itemKey}">
+      <td>${cat.icon} ${item.name}</td>
+      <td class="price-cell${item.pdd===min?' price-low':' price-high'}">¥${item.pdd.toLocaleString()}${renderDelta(item.delta[0])}</td>
+      <td class="price-cell${item.tb===min?' price-low':' price-high'}">¥${item.tb.toLocaleString()}${renderDelta(item.delta[1])}</td>
+      <td class="price-cell${item.jd===min?' price-low':' price-high'}">¥${item.jd.toLocaleString()}${renderDelta(item.delta[2])}</td>
+      <td>${lowest.map(p=>`<span class="platform-badge ${p.cls}">${p.name}</span> ¥${p.val.toLocaleString()}`).join('<br>')}</td>
+    </tr>`;
+  }).join('');
+}
+
+function renderDelta(d){
+  if(!d||d===0)return '';
+  const cls = d<0?'down':'up';
+  const arrow = d<0?'↓':'↑';
+  return `<span class="price-delta ${cls}">${arrow}${Math.abs(d)}</span>`;
+}
+
+function renderCompare(){
+  const slots = document.getElementById('compareSlots');
+  const result = document.getElementById('compareResult');
+  const maxSlots = 3;
+  const html = [];
+  for(let i=0;i<maxSlots;i++){
+    if(i<compareList.length){
+      const [catKey,idx] = compareList[i].split('-');
+      const item = priceData[catKey].items[parseInt(idx)];
+      const cat = priceData[catKey];
+      html.push(`<div class="compare-slot filled">
+        <button class="remove-btn" onclick="event.stopPropagation();removeCompare(${i})">✕</button>
+        <div class="slot-product">${cat.icon} ${item.name}</div>
+        <div class="slot-prices">
+          <span class="slot-price"><span class="platform-badge badge-pdd">拼多多</span> ¥${item.pdd}</span>
+          <span class="slot-price"><span class="platform-badge badge-tb">淘宝</span> ¥${item.tb}</span>
+          <span class="slot-price"><span class="platform-badge badge-jd">京东</span> ¥${item.jd}</span>
+        </div>
+      </div>`);
+    } else {
+      html.push(`<div class="compare-slot"><span class="slot-hint">+ 点击表格添加</span></div>`);
+    }
+  }
+  slots.innerHTML = html.join('');
+
+  // Result
+  if(compareList.length>=2){
+    result.classList.add('show');
+    // Calculate best platform for each
+    const platforms = ['pdd','tb','jd'];
+    const platformNames = {pdd:'拼多多',tb:'淘宝',jd:'京东'};
+    const platformClasses = {pdd:'badge-pdd',tb:'badge-tb',jd:'badge-jd'};
+    const totals = platforms.map(p=>{
+      let sum=0,names=[];
+      compareList.forEach(key=>{
+        const [ck,i]=key.split('-');
+        const item = priceData[ck].items[parseInt(i)];
+        sum+=item[p];
+        names.push(item.name);
+      });
+      return {platform:p,name:platformNames[p],cls:platformClasses[p],total:sum,items:names};
+    });
+    const minTotal = Math.min(...totals.map(t=>t.total));
+    result.innerHTML = `<h4>📊 对比结果：<span style="color:var(--cyan)">${compareList.map(k=>{const[ck,i]=k.split('-');return priceData[ck].items[parseInt(i)].name}).join(' vs ')}</span></h4>
+    <div class="result-grid">${totals.map(t=>{
+      const saving = t.total-minTotal;
+      return `<div class="result-card">
+        <div class="platform"><span class="platform-badge ${t.cls}">${t.name}</span>${t.total===minTotal?' 🏆 最低':''}</div>
+        <div class="saving">¥${t.total.toLocaleString()}</div>
+        <div class="detail">${saving>0?`比最低价贵 ¥${saving.toLocaleString()}`:'全网最低价'}</div>
+      </div>`;
+    }).join('')}</div>`;
+  } else {
+    result.classList.remove('show');
+    result.innerHTML = '';
+  }
+}
+
+// ============ ACTIONS ============
+function switchCat(key){
+  activeCat=key;
+  renderSidebar();
+  renderTable();
+}
+
+function toggleCompare(itemKey){
+  const idx = compareList.indexOf(itemKey);
+  if(idx>=0){compareList.splice(idx,1)}
+  else if(compareList.length<3){compareList.push(itemKey)}
+  renderTable();
+  renderCompare();
+}
+
+function removeCompare(i){compareList.splice(i,1);renderTable();renderCompare()}
+function clearCompare(){compareList=[];renderTable();renderCompare()}
+
+// Sort
+document.addEventListener('click',e=>{
+  const th = e.target.closest('th');
+  if(!th)return;
+  const key = th.dataset.sort;
+  if(!key)return;
+  if(sortKey===key){sortAsc=!sortAsc}else{sortKey=key;sortAsc=true}
+  document.querySelectorAll('th').forEach(h=>h.classList.remove('sorted'));
+  th.classList.add('sorted');
+  renderTable();
+});
+
+// Search
+document.getElementById('searchInput').addEventListener('input',e=>{
+  searchQuery = e.target.value;
+  renderTable();
+});
+
+// Countdown
+function updateCountdown(){
+  const now = new Date();
+  const updateHour = now.getHours()<12?12:24;
+  const next = new Date(now);next.setHours(updateHour,0,0,0);
+  if(now.getHours()>=12)next.setDate(next.getDate()+(updateHour===12?1:0));
+  const diff = next-now;
+  const h = Math.floor(diff/3600000);
+  const m = Math.floor((diff%3600000)/60000);
+  document.getElementById('countdown').textContent = `下次更新: ${h}h ${m}m`;
+}
+setInterval(updateCountdown,60000);
+updateCountdown();
+
+// Update time
+const now = new Date();
+document.getElementById('updateTime').textContent =
+  `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')} ${String(now.getHours()).padStart(2,'0')}:00`;
+
+// Init
+renderSidebar();
+renderTable();
+renderCompare();
+</script>
 </body>
 </html>
